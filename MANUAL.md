@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-06 · 37. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-06 · 41. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -19,6 +19,20 @@ Your GitHub repository (`aaron-sn01/ledgerline`) contains:
 - `prices.json` and `compositions.json`: written by the updater. Never edit these by hand.
 
 Your data (entries, plan, holdings, debts, settings) is stored inside the app on each device. If sync is on, an encrypted copy is kept in a private GitHub Gist. The app's code contains **no personal data**: a new device starts empty (with a welcome note) and gets your data when you connect sync or restore a backup. Because the repository is public, nothing personal should ever be written into `index.html` or the other files.
+
+## Installing the app
+
+Ledgerline is a web page that you install like an app, so it opens full screen with its own icon:
+
+- **iPhone**: open the link in **Safari** → tap **Share** (the square with an arrow) → **Add to Home Screen** → **Add**. Open it from the new icon.
+- **iPad**: in **Safari**, tap **Share** at the top right → **Add to Home Screen** → **Add**.
+- **Mac**: in **Safari** (macOS 14 or later), menu **File → Add to Dock** → **Add**. In **Chrome**: **⋮** → **Cast, save and share** → **Create shortcut…**, tick **Open as window** → **Create**.
+- **Windows**: in **Edge**, **⋯** → **Apps** → **Install this site as an app** → **Install**. In **Chrome**: **⋮** → **Cast, save and share** → **Create shortcut…**, tick **Open as window** → **Create**. Then pin it to the taskbar from the Start menu.
+- **Android**: in **Chrome**, **⋮** → **Add to Home screen** (or **Install app**).
+
+The installed app keeps its **own data**, separate from the same page in a browser tab. Set it up in the installed app, and use sync or a backup to move data between them. The same steps are under **Settings → Install the app**, which highlights the device you're on.
+
+**Do I need a GitHub account?** Only for sync between your own devices and for the Apple Pay automation. Everything else works without one; your data then simply lives on that one device (move it with **Download backup** and **Restore from backup**).
 
 ## 2. Everyday use
 
@@ -77,9 +91,9 @@ Your data (entries, plan, holdings, debts, settings) is stored inside the app on
 
 Anyone can use Ledgerline through your link (https://aaron-sn01.github.io/ledgerline/). Their data stays on their own devices; nobody sees anyone else's, including you.
 
-1. Send them the link. On iPhone they open it in Safari, tap **Share → Add to Home Screen**. On a Mac in Safari: **File → Add to Dock**.
+1. Send them the link: https://aaron-sn01.github.io/ledgerline/. They install it as described in **Installing the app** above (iPhone, iPad, Mac, Windows, Android).
 2. The **setup wizard** opens the first time: name, currency, monthly income, fixed costs, investment plans, cash and savings goal. Every step can be skipped; everything can be changed later in Settings (**Settings → Backup & export → Run the setup again** reopens it).
-3. For sync between their own devices and the Apple Pay automation, they use **their own** GitHub account and token (sections 9 and 2).
+3. For sync between their own devices and the Apple Pay automation, they need **their own** free GitHub account and token (sections 9 and 2); nobody can use someone else's. Without GitHub everything else works on one device.
 4. When you upload a new version, they get it automatically the next time they open the app. Their data is upgraded on first launch, like yours.
 5. ETF prices come from your `tickers.json`. If someone holds a fund that isn't listed, add it (section 5) or they enter its price by hand.
 
@@ -166,7 +180,7 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 
 Ledgerline treats all your accounts as one cash total. A month's budget is kept aside from that total until the month ends; the rest counts as cash savings.
 
-- To correct the total: **Wealth → Cash savings → Update balance**. You can list each account separately and the total adds up by itself.
+- To correct the total: **Wealth → Cash savings → Update balance**. You can list each account separately and the total adds up by itself. When you add your first account, your existing total is kept as a row "My accounts so far", so nothing is lost; split it into separate accounts whenever you like.
 - **Opening a savings account** changes nothing in how Ledgerline works: add it as another account row in **Update balance**. Moving money between your own accounts is never spending; the importer skips such transfers.
 - Interest goes in as **Money in → Cash savings**. The importer does this automatically for interest lines.
 
@@ -179,7 +193,7 @@ Everything is shown in your **home currency** (the setup wizard asks for it; cha
 - **Accounts**: in **Update balance**, each account gets a currency; the total is converted.
 - **Holdings**: each holding has a price currency, taken from the price file (a US-listed fund in USD) or chosen in its dialog. Its value is converted at today's rate, its history at each day's rate.
 - **Debts**: choose the debt's currency when adding it. Its card shows amounts in that currency, plus the converted total; repayments are converted at the day's rate.
-- **Wealth**: switch between **All in [home currency]** and **Each currency** (side by side, not converted), plus a **Currencies** chart under Asset types.
+- **Wealth**: at the top of the Net worth box, switch between **All in [home currency]** and **Each currency** (side by side, not converted), plus a **Currencies** chart under Asset types. The view only has something to split once an account, holding or debt has another currency.
 - **Changing the home currency** converts entries at the rate of their own day; plan items, holdings, accounts and debts keep their currency and are converted automatically.
 - **Exchange rates** are the ECB's official daily reference rates (about 30 currencies, including USD, GBP, CHF, CAD and SGD), plus the UAE dirham, Saudi and Qatari riyal, Omani rial and Bahraini and Jordanian dinar through their official fixed peg to the US dollar, loaded from frankfurter.app and kept on the device, so the app works offline with the last known rates. **Refresh** under the currency setting loads them again.
 

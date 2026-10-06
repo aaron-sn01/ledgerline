@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-06 · 37. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-06 · 41. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -19,6 +19,20 @@ Das GitHub-Repository der App enthält:
 - `prices.json` und `compositions.json`: schreibt der Updater. Nie von Hand bearbeiten.
 
 Deine Daten (Einträge, Plan, Positionen, Schulden, Einstellungen) liegen in der App auf jedem Gerät. Mit Sync liegt eine verschlüsselte Kopie in einem privaten GitHub-Gist. Der Code der App enthält **keine persönlichen Daten**: Ein neues Gerät startet leer und bekommt deine Daten, sobald du Sync verbindest oder ein Backup wiederherstellst.
+
+## Die App installieren
+
+Ledgerline ist eine Webseite, die du wie eine App installierst; sie öffnet sich dann im Vollbild mit eigenem Symbol:
+
+- **iPhone**: Link in **Safari** öffnen → auf **Teilen** tippen (das Quadrat mit Pfeil) → **Zum Home-Bildschirm** → **Hinzufügen**. Über das neue Symbol öffnen.
+- **iPad**: in **Safari** oben rechts auf **Teilen** → **Zum Home-Bildschirm** → **Hinzufügen**.
+- **Mac**: in **Safari** (ab macOS 14) Menü **Ablage → Zum Dock hinzufügen** → **Hinzufügen**. In **Chrome**: **⋮** → **Streamen, speichern und teilen** → **Verknüpfung erstellen …**, **Als Fenster öffnen** anhaken → **Erstellen**.
+- **Windows**: in **Edge** **⋯** → **Apps** → **Diese Website als App installieren** → **Installieren**. In **Chrome**: **⋮** → **Streamen, speichern und teilen** → **Verknüpfung erstellen …**, **Als Fenster öffnen** anhaken → **Erstellen**. Danach im Startmenü an die Taskleiste anheften.
+- **Android**: in **Chrome** **⋮** → **Zum Startbildschirm hinzufügen** (oder **App installieren**).
+
+Die installierte App hat ihre **eigenen Daten**, getrennt von derselben Seite in einem Browser-Tab. Richte sie in der installierten App ein und nutze Sync oder ein Backup, um Daten zu übertragen. Dieselben Schritte stehen unter **Einstellungen → App installieren**, wo dein aktuelles Gerät hervorgehoben ist.
+
+**Brauche ich ein GitHub-Konto?** Nur für Sync zwischen deinen eigenen Geräten und für die Apple-Pay-Automation. Alles andere funktioniert ohne; deine Daten liegen dann einfach auf diesem einen Gerät (übertragen mit **Backup herunterladen** und **Aus Backup wiederherstellen**).
 
 ## 2. Alltag
 
@@ -92,9 +106,9 @@ Für Trade Republic, Sparkasse, flatex und Coinbase gibt es eigene Leser. Bei al
 
 Jeder kann Ledgerline über denselben Link nutzen. Die Daten bleiben auf den eigenen Geräten; niemand sieht die Daten anderer.
 
-1. Link schicken. Auf dem iPhone in Safari öffnen, **Teilen → Zum Home-Bildschirm**. Auf dem Mac in Safari: **Ablage → Zum Dock hinzufügen**.
+1. Link schicken: https://aaron-sn01.github.io/ledgerline/. Installiert wird wie oben unter **Die App installieren** beschrieben (iPhone, iPad, Mac, Windows, Android).
 2. Beim ersten Öffnen startet die **Einrichtung**: Name, Währung, Sprache, Monatseinkommen, Fixkosten, Sparpläne, Bargeld und Sparziel. Jeder Schritt lässt sich überspringen, alles später in den Einstellungen ändern (**Einstellungen → Backup & Export → Einrichtung erneut starten**).
-3. Für Sync zwischen den eigenen Geräten und die Apple-Pay-Automation nutzt jede Person ihr **eigenes** GitHub-Konto und Token (Abschnitte 9 und 2).
+3. Für Sync zwischen den eigenen Geräten und die Apple-Pay-Automation braucht jede Person ein **eigenes** kostenloses GitHub-Konto und Token (Abschnitte 9 und 2); fremde lassen sich nicht nutzen. Ohne GitHub funktioniert alles andere auf einem Gerät.
 4. Neue Versionen kommen automatisch beim nächsten Öffnen an; die Daten werden beim ersten Start angepasst.
 5. ETF-Kurse kommen aus `tickers.json`. Fehlt ein Fonds, kann er dort ergänzt werden (Abschnitt 5), oder man gibt den Kurs von Hand ein.
 
@@ -160,7 +174,7 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 
 Ledgerline behandelt alle Konten als eine Summe. Das Budget des laufenden Monats wird davon zurückgehalten; der Rest zählt als Ersparnisse.
 
-- Summe korrigieren: **Vermögen → Ersparnisse → Saldo aktualisieren**, optional mit jedem Konto einzeln.
+- Summe korrigieren: **Vermögen → Ersparnisse → Saldo aktualisieren**, optional mit jedem Konto einzeln. Beim ersten Konto bleibt deine bisherige Summe als Zeile „Meine bisherigen Konten“ erhalten, damit nichts verloren geht; teile sie auf, wann immer du willst.
 - **Neues Sparkonto**: einfach als weitere Zeile hinzufügen. Überweisungen zwischen eigenen Konten sind nie Ausgaben; der Import überspringt sie.
 - Zinsen kommen als **Einnahme → Ersparnisse** hinein; der Import erledigt das bei Zinszeilen automatisch.
 
@@ -173,7 +187,7 @@ Alles wird in deiner **Heimatwährung** angezeigt (die Einrichtung fragt danach;
 - **Konten**: Unter **Saldo aktualisieren** bekommt jedes Konto eine Währung; die Summe wird umgerechnet.
 - **Positionen**: Jede Position hat eine Kurswährung, aus der Kursdatei (ein US-Fonds in USD) oder im Dialog gewählt. Der Wert wird zum heutigen Kurs umgerechnet, der Verlauf zum Kurs jedes Tages.
 - **Schulden**: Beim Anlegen die Währung wählen. Die Karte zeigt Beträge in dieser Währung plus die umgerechnete Summe; Tilgungen werden zum Tageskurs umgerechnet.
-- **Vermögen**: Wechsle zwischen **Alles in [Heimatwährung]** und **Je Währung** (nebeneinander, nicht umgerechnet), dazu ein Diagramm **Währungen** unter Anlageklassen.
+- **Vermögen**: Oben in der Box Vermögen wechselst du zwischen **Alles in [Heimatwährung]** und **Je Währung** (nebeneinander, nicht umgerechnet), dazu ein Diagramm **Währungen** unter Anlageklassen. Aufzuteilen gibt es erst etwas, wenn ein Konto, eine Position oder eine Schuld eine andere Währung hat.
 - **Heimatwährung ändern** rechnet Einträge zum Kurs ihres Tages um; Plan, Positionen, Konten und Schulden behalten ihre Währung und werden automatisch umgerechnet.
 - **Wechselkurse** sind die offiziellen täglichen EZB-Referenzkurse (etwa 30 Währungen, darunter USD, GBP, CHF, CAD und SGD), dazu VAE-Dirham, Saudi- und Katar-Riyal, Omanischer Rial sowie Bahrain- und Jordanischer Dinar über ihre offizielle feste Bindung an den US-Dollar, geladen von frankfurter.app und auf dem Gerät gespeichert, sodass die App offline mit den letzten Kursen funktioniert. **Aktualisieren** bei der Währungseinstellung lädt sie neu.
 
