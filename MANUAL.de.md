@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-06 · 48. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-06 · 49. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -117,7 +117,7 @@ Jeder kann Ledgerline über denselben Link nutzen. Die Daten bleiben auf den eig
 1. Die neue `index.html` herunterladen.
 2. Im Repository **Add file → Upload files** wählen, die Datei hineinziehen (Name genau `index.html`) und **Commit changes** klicken.
 3. Im Tab **Actions** warten, bis **pages build and deployment** einen grünen Haken zeigt (1 bis 2 Minuten, länger, wenn GitHub ausgelastet ist).
-4. Die App ganz schließen und neu öffnen. Auf dem Mac lädt ⌘R neu.
+4. Die App bemerkt die neue Version von selbst (beim Öffnen, beim Zurückkehren und alle 30 Minuten) und zeigt **Neue Version verfügbar → Neu laden**. Falls nicht, auf dem Mac ⌘R drücken oder die App ganz beenden (⌘Q bzw. auf dem iPhone wegwischen) und neu öffnen. Die App nie aus dem Dock oder vom Home-Bildschirm entfernen, um sie zu aktualisieren: Das löscht ihre Daten auf diesem Gerät.
 
 Deine Daten bleiben erhalten; neue Versionen passen alte Daten beim ersten Start automatisch an.
 
@@ -235,6 +235,7 @@ Sync hält deine Geräte über eine verschlüsselte Datei in **deinem eigenen ko
 - **Apple-Pay-Zahlungen kommen nicht an**: siehe Abschnitt 2.
 - **Nach einem Import stimmt etwas nicht**: den Eintrag auf der Seite Monat öffnen und bearbeiten oder löschen.
 - **Demodaten** (**Einstellungen → Backup & Export → Mit Demodaten ansehen**): überschreiben nie deine Daten. Sie fügen Beispiel-Einträge von Januar bis heute hinzu, als Demo markiert, und werden wie jeder Eintrag auf deine anderen Geräte synchronisiert. Solange sie da sind, fließen sie in Budget, Sparquote und Diagramme ein. **Demodaten entfernen** an derselben Stelle löscht genau diese Einträge und stellt Startmonat, Kontosumme und Meilensteine wieder her (für ein paar Sekunden erscheint **Rückgängig**). Ganz ohne Auswirkung auf deine Daten probierst du sie in einem separaten Browser aus (etwa einem Safari-Tab statt der App auf dem Home-Bildschirm), ohne Sync zu verbinden.
+- **Alle Daten in diesem Browser löschen** (Einstellungen → Backup & Export) betrifft nur den Browser bzw. die installierte App, in der du es antippst; andere Browser, andere Geräte, deine Sync-Datei und Backups bleiben, wie sie sind.
 - **Ein Gerät neu aufsetzen**: zuerst ein Backup unter **Einstellungen → Backup & Export** sichern, später mit **Aus Backup wiederherstellen** einspielen.
 
 ## 12. For an AI assistant or developer

@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-06 · 48. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-06 · 49. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -119,7 +119,7 @@ The same text is shown in the setup wizard and under **Settings → Backup & exp
 1. Download the new `index.html`.
 2. In your repository, click **Add file → Upload files**, drop the file in (the name must be exactly `index.html`) and click **Commit changes**.
 3. Open the **Actions** tab and wait for **pages build and deployment** to show a green tick (1 to 2 minutes, longer if GitHub is busy).
-4. Close the app fully and open it again. On a Mac, ⌘R reloads.
+4. The app notices the new version by itself (when it opens, when you return to it, and every 30 minutes) and shows **New version available → Reload**. If it doesn't, press ⌘R on the Mac, or quit the app fully (⌘Q, or swipe it away on iPhone) and open it again. Never remove the app from the Dock or home screen to update it: that deletes its data on that device.
 
 Your data carries over automatically. New versions upgrade old data on first launch.
 
@@ -241,6 +241,7 @@ Sync keeps your devices in step through an encrypted file in **your own free Git
 - **Something looks wrong after an import**: open the entry from the Month page and edit or delete it.
 - **Apple Pay payments don't arrive**: see the end of section 2.
 - **Demo data** (**Settings → Backup & export → Preview with demo data**): never overwrites your data. It adds sample entries from January to today, marked as demo, and syncs to your other devices like any entry. While it's there, your budget, savings rate and charts include it. **Remove demo data** in the same place deletes exactly those entries and puts your start month, cash total and milestones back (an **Undo** appears for a few seconds). To try it without touching your data at all, use it in a separate browser (for example a Safari tab instead of your home-screen app) with sync not connected.
+- **Erase all data in this browser** (Settings → Backup & export) only affects the browser or installed app you press it in; other browsers, other devices, your sync file and backups stay as they are.
 - **Start over on a device**: **Settings → Backup & export** to save a backup first, then restore it later with **Restore from backup**.
 
 ## 12. For an AI assistant or developer
