@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-06 · 26. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-06 · 28. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -31,7 +31,7 @@ Your data (entries, plan, holdings, debts, settings) is stored inside the app on
 5. **Apple Pay, automatically**: set up the Shortcuts automation once (**Settings → Apple Pay automation**, steps below) and every Apple Pay payment arrives in Ledgerline by itself, either for you to confirm or added straight away.
 6. **Undo**: after deleting something or importing, an **Undo** button appears for a few seconds.
 7. **Help**: every box has a **?** next to its title that explains what it shows.
-8. **Tour**: **Settings → Backup & export → Take the tour** (or **More → Take the tour** on iPhone) walks through the app in 9 stops. "Look around first" in the setup wizard runs it on sample data; **Set up my own** clears the sample data and starts the setup.
+8. **Tour**: **Settings → Backup & export → Take the tour** (or **More → Take the tour** on iPhone) walks through the app in 11 stops, including where to enter your fixed costs and the Apple Pay automation. "Look around first" in the setup wizard runs it on sample data; **Set up my own** clears the sample data and starts the setup.
 9. **Setup help for your AI**: on the Manual page and in **Settings → Backup & export**. A text to give ChatGPT, Claude or similar; it guides you through installing, sync and the Apple Pay automation one step at a time, and never asks for your token, passphrase or bank data.
 10. **What's new**: after each update, a short note lists the changes once.
 11. **Back up**: after each monthly review, go to **Settings → Backup & export → Download backup** and keep the file in iCloud Drive or similar.
@@ -174,7 +174,7 @@ Everything is shown in your **home currency** (the setup wizard asks for it; cha
 - **Debts**: choose the debt's currency when adding it. Its card shows amounts in that currency, plus the converted total; repayments are converted at the day's rate.
 - **Wealth**: switch between **All in [home currency]** and **Each currency** (side by side, not converted), plus a **Currencies** chart under Asset types.
 - **Changing the home currency** converts entries at the rate of their own day; plan items, holdings, accounts and debts keep their currency and are converted automatically.
-- **Exchange rates** are the ECB's official daily reference rates (about 30 currencies), loaded from frankfurter.app and kept on the device, so the app works offline with the last known rates. **Refresh** under the currency setting loads them again.
+- **Exchange rates** are the ECB's official daily reference rates (about 30 currencies, including USD, GBP, CHF, CAD and SGD), plus the UAE dirham, Saudi and Qatari riyal, Omani rial and Bahraini and Jordanian dinar through their official fixed peg to the US dollar, loaded from frankfurter.app and kept on the device, so the app works offline with the last known rates. **Refresh** under the currency setting loads them again.
 
 With only one currency in use, nothing changes: every number is exactly as before.
 
@@ -203,6 +203,7 @@ With only one currency in use, nothing changes: every number is exactly as befor
 - **"Sync problem, see Settings"**: open **Settings → Sync between devices** for the exact reason. "Slow down" means GitHub's rate limit, which clears on its own. "Refused access" means the token is missing the gist permission.
 - **Something looks wrong after an import**: open the entry from the Month page and edit or delete it.
 - **Apple Pay payments don't arrive**: see the end of section 2.
+- **Demo data** (**Settings → Backup & export → Preview with demo data**): never overwrites your data. It adds sample entries from January to today, marked as demo, and syncs to your other devices like any entry. While it's there, your budget, savings rate and charts include it. **Remove demo data** in the same place deletes exactly those entries and puts your start month, cash total and milestones back (an **Undo** appears for a few seconds). To try it without touching your data at all, use it in a separate browser (for example a Safari tab instead of your home-screen app) with sync not connected.
 - **Start over on a device**: **Settings → Backup & export** to save a backup first, then restore it later with **Restore from backup**.
 
 ## 12. For an AI assistant or developer

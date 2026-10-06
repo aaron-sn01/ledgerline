@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-06 · 26. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-06 · 28. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -31,7 +31,7 @@ Deine Daten (Einträge, Plan, Positionen, Schulden, Einstellungen) liegen in der
 5. **Apple Pay automatisch**: Richte einmal die Kurzbefehle-Automation ein (**Einstellungen → Apple-Pay-Automation**, Schritte unten). Dann kommt jede Apple-Pay-Zahlung von selbst in Ledgerline an, zum Bestätigen oder direkt eingetragen.
 6. **Rückgängig**: Nach dem Löschen oder Importieren erscheint für ein paar Sekunden **Rückgängig**.
 7. **Hilfe**: Jede Box hat neben ihrem Titel ein **?**, das erklärt, was sie zeigt.
-8. **Tour**: **Einstellungen → Backup & Export → Tour starten** (auf dem iPhone **Mehr → Tour starten**) führt in 9 Stationen durch die App. „Erst mal umsehen“ in der Einrichtung zeigt sie mit Beispieldaten; **Eigenes einrichten** entfernt die Beispieldaten und startet die Einrichtung.
+8. **Tour**: **Einstellungen → Backup & Export → Tour starten** (auf dem iPhone **Mehr → Tour starten**) führt in 11 Stationen durch die App, auch dazu, wo du deine Fixkosten einträgst, und zur Apple-Pay-Automation. „Erst mal umsehen“ in der Einrichtung zeigt sie mit Beispieldaten; **Eigenes einrichten** entfernt die Beispieldaten und startet die Einrichtung.
 9. **Einrichtungshilfe für deine KI**: auf der Seite Anleitung und unter **Einstellungen → Backup & Export**. Ein Text für ChatGPT, Claude o. Ä.; er führt dich Schritt für Schritt durch Installation, Sync und Apple-Pay-Automation und fragt nie nach Token, Passphrase oder Bankdaten.
 10. **Neu**: Nach jedem Update zeigt ein kurzer Hinweis einmal die Änderungen.
 11. **Backup**: Nach jedem Monatsrückblick unter **Einstellungen → Backup & Export → Backup herunterladen** sichern und die Datei in iCloud Drive o. Ä. ablegen.
@@ -168,7 +168,7 @@ Alles wird in deiner **Heimatwährung** angezeigt (die Einrichtung fragt danach;
 - **Schulden**: Beim Anlegen die Währung wählen. Die Karte zeigt Beträge in dieser Währung plus die umgerechnete Summe; Tilgungen werden zum Tageskurs umgerechnet.
 - **Vermögen**: Wechsle zwischen **Alles in [Heimatwährung]** und **Je Währung** (nebeneinander, nicht umgerechnet), dazu ein Diagramm **Währungen** unter Anlageklassen.
 - **Heimatwährung ändern** rechnet Einträge zum Kurs ihres Tages um; Plan, Positionen, Konten und Schulden behalten ihre Währung und werden automatisch umgerechnet.
-- **Wechselkurse** sind die offiziellen täglichen EZB-Referenzkurse (etwa 30 Währungen), geladen von frankfurter.app und auf dem Gerät gespeichert, sodass die App offline mit den letzten Kursen funktioniert. **Aktualisieren** bei der Währungseinstellung lädt sie neu.
+- **Wechselkurse** sind die offiziellen täglichen EZB-Referenzkurse (etwa 30 Währungen, darunter USD, GBP, CHF, CAD und SGD), dazu VAE-Dirham, Saudi- und Katar-Riyal, Omanischer Rial sowie Bahrain- und Jordanischer Dinar über ihre offizielle feste Bindung an den US-Dollar, geladen von frankfurter.app und auf dem Gerät gespeichert, sodass die App offline mit den letzten Kursen funktioniert. **Aktualisieren** bei der Währungseinstellung lädt sie neu.
 
 Mit nur einer Währung ändert sich nichts: Jede Zahl ist genau wie vorher.
 
@@ -198,6 +198,7 @@ Mit nur einer Währung ändert sich nichts: Jede Zahl ist genau wie vorher.
 - **„Sync problem, see Settings“**: **Einstellungen → Sync zwischen Geräten** nennt den genauen Grund. „Slow down“ ist GitHubs Limit und verschwindet von selbst; „Refused access“ heißt, dem Token fehlt die gist-Berechtigung.
 - **Apple-Pay-Zahlungen kommen nicht an**: siehe Abschnitt 2.
 - **Nach einem Import stimmt etwas nicht**: den Eintrag auf der Seite Monat öffnen und bearbeiten oder löschen.
+- **Demodaten** (**Einstellungen → Backup & Export → Mit Demodaten ansehen**): überschreiben nie deine Daten. Sie fügen Beispiel-Einträge von Januar bis heute hinzu, als Demo markiert, und werden wie jeder Eintrag auf deine anderen Geräte synchronisiert. Solange sie da sind, fließen sie in Budget, Sparquote und Diagramme ein. **Demodaten entfernen** an derselben Stelle löscht genau diese Einträge und stellt Startmonat, Kontosumme und Meilensteine wieder her (für ein paar Sekunden erscheint **Rückgängig**). Ganz ohne Auswirkung auf deine Daten probierst du sie in einem separaten Browser aus (etwa einem Safari-Tab statt der App auf dem Home-Bildschirm), ohne Sync zu verbinden.
 - **Ein Gerät neu aufsetzen**: zuerst ein Backup unter **Einstellungen → Backup & Export** sichern, später mit **Aus Backup wiederherstellen** einspielen.
 
 ## 12. For an AI assistant or developer
