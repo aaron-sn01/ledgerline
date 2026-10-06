@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-06 · 19. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-06 · 21. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -30,7 +30,7 @@ Your data (entries, plan, holdings, debts, settings) is stored inside the app on
 4. **Monthly review**: opens by itself after a month ends. Correct share counts and your cash total there.
 5. **Apple Pay, automatically**: set up the Shortcuts automation once (**Settings → Apple Pay automation**, steps below) and every Apple Pay payment arrives in Ledgerline by itself, either for you to confirm or added straight away.
 6. **Undo**: after deleting something or importing, an **Undo** button appears for a few seconds.
-7. **Help**: the **?** next to a box title explains what that box means.
+7. **Help**: every box has a **?** next to its title that explains what it shows.
 8. **Back up**: after each monthly review, go to **Settings → Backup & export → Download backup** and keep the file in iCloud Drive or similar.
 
 ### Setting up the Apple Pay automation (iPhone, once)
@@ -119,6 +119,7 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 - **Savings-rate goal**: **Settings → Savings-rate goal**. Add a goal change from a given month (for example 20% from 03/2027). The switch below it decides whether the cash part of the goal is set aside before your spending budget.
 - **Spending categories**: **Settings → Categories**. Add, rename, recolor or delete them. The amount box next to each is an optional monthly limit; leave it empty for none.
 - **Fixed-cost groups** (Housing, Insurance and so on): **Settings → Fixed-cost groups**.
+- **Wealth over time**: the summary above the chart counts only from the day you started tracking. Anything earlier (the dashed line) is an estimate made from your current holdings at past prices, so it shows how the market moved, not how much you actually had.
 - **Finding a setting**: use the search box or the group buttons (Plan, Money, Investments, Devices, Advanced) at the top of Settings.
 - **Settings layout**: Recurring plan spans the full width; the other boxes flow in two columns (one on a phone).
 - **Box layout**: tap a box's title to collapse it. **Rearrange boxes** at the bottom of each page lets you drag boxes around. Both are remembered per device.
@@ -181,7 +182,7 @@ The file is a sequence of blocks, in this order. Later blocks may use earlier on
 4. Importer: `ImportCore.parse` (pure parsers per document type: Trade Republic, Sparkasse, flatex, Coinbase), classification in `buildProposals` (transfers, fixed-cost and plan matching, refunds, duplicates, categories), and the review dialog. Duplicates are found with `align()`, an order-preserving one-to-one pairing of same-amount, similar-name entries within 2 days (and 15 minutes when both have a time); entries from the same file are never paired. Don't replace this with a simple "same amount within a few days" check: it merges repeated purchases.
 5. PDF summary: section builders and fit-to-one-page printing.
 6. Overview: savings rate and goal, typical month, category trends and limits, Ways to save, net-worth change, the More sheet.
-   Extras (after the date boxes and the manual): the Apple Pay inbox (`Inbox`: reads and deletes comments of the form `ledgerline|amount|merchant` on the sync Gist and feeds them through the normal import review), "?" help (`HELP`), Settings search and groups, `Undo`, nudges, and milestone celebrations. They hook in through `window.AFTER_RENDER`, a list of functions that runs after every render.
+   Extras (after the date boxes and the manual): the Apple Pay inbox (`Inbox`: reads and deletes comments of the form `ledgerline|amount|merchant` on the sync Gist and feeds them through the normal import review), "?" help (`HELP`, one text per box title, plus `HELP_BY_VIEW` for boxes titled with the user's own text; every new box needs an entry), Settings search and groups, `Undo`, nudges, and milestone celebrations. They hook in through `window.AFTER_RENDER`, a list of functions that runs after every render.
 7. Arrange mode: drag-and-drop box order (`applyLayout`).
 8. Date boxes: replaces native date inputs with day/month/year text boxes.
 9. Manual (this text) and extras (see above).
