@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-06 · 31. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-06 · 34. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -61,8 +61,13 @@ Deine Daten (Einträge, Plan, Positionen, Schulden, Einstellungen) liegen in der
 10. Tippe in der Leiste über der Tastatur auf die Zahlungsvariable (**Transaktion** oder **Kurzbefehleingabe**), dann auf die eingefügte Blase, und wähle **Betrag**.
 11. Tippe `|`, füge dieselbe Variable erneut ein, tippe darauf und wähle **Händler**. Das Feld lautet jetzt `ledgerline|Betrag|Händler`, mit Betrag und Händler als farbige Blasen.
 12. Tippe auf **Fertig** bzw. den Zurück-Pfeil, um zu speichern.
+13. Tippe einmal auf **▶**. Wenn iOS fragt, ob der Kurzbefehl eine Verbindung zu **api.github.com** herstellen darf, tippe auf **Erlauben** (oder **Immer erlauben**). Ohne das scheitert die Automation unbemerkt, wenn sie von selbst läuft. Der Testlauf kommt ohne Betrag an; Ledgerline zeigt ihn als unlesbar und entfernt ihn mit einem Tipp.
 
-**Testen**: Bezahle etwas Kleines mit Apple Pay und öffne Ledgerline. Ein Hinweis zeigt die Zahlung, oder sie ist schon eingetragen. Die Automation von Hand auszuführen funktioniert nicht, weil es ohne echte Zahlung keinen Betrag und keinen Händler gibt.
+**Apple Pay online und in Apps** löst die Automation nicht aus: iOS bietet sie nur für das Halten von iPhone oder Watch an ein Terminal. Online-Käufe erfasst du per Schnelleintrag, oder der monatliche Auszugsimport erfasst sie.
+
+**Testen**: Bezahle etwas Kleines mit Apple Pay an einem Kassenterminal und öffne Ledgerline. Ein Hinweis zeigt die Zahlung, oder sie ist schon eingetragen. Die Automation von Hand auszuführen funktioniert nicht, weil es ohne echte Zahlung keinen Betrag und keinen Händler gibt.
+
+**Prüfen, was angekommen ist**: **Jetzt nach Zahlungen suchen** in Ledgerline zeigt die Uhrzeit der letzten Prüfung, wie viele Zahlungen warten und was ohne Betrag ankam (mit einem Beispiel). Um nur die Verbindung zu testen, tippe in der Automation auf ▶: Kurzbefehle zeigt dann GitHubs Antwort (ein Textblock mit `"id"` heißt: hat funktioniert; „Bad credentials“ oder „Not Found“ heißen: Token oder Adresse stimmt nicht). Ein Testlauf von Hand kommt ohne Betrag an und erscheint als unlesbar; mit einem Tipp entfernen.
 
 **Wenn nichts ankommt**: Öffne auf dem iPhone **Einstellungen → Apps → Wallet** und schalte **Mobile Daten** ein; prüfe, ob die Automation noch auf **Sofort ausführen** steht; tippe in Ledgerline auf **Jetzt nach Zahlungen suchen**; und wenn du dein GitHub-Token ersetzt, trag das neue auch in der Automation ein. Solange eine Zahlung auf Ledgerline wartet, liegt sie unverschlüsselt (nur Betrag und Händler) in deiner Sync-Datei und wird gelöscht, sobald sie abgeholt ist.
 

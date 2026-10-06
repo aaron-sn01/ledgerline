@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-06 · 31. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-06 · 34. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -61,8 +61,13 @@ Your data (entries, plan, holdings, debts, settings) is stored inside the app on
 10. In the bar above the keyboard tap **Shortcut Input**. Tap the inserted bubble and choose **Amount**.
 11. Type `|`, insert **Shortcut Input** again, tap it and choose **Merchant**. The value now reads `ledgerline|Amount|Merchant`.
 12. Tap **Done**.
+13. Tap **▶** once. When iOS asks whether the shortcut may connect to **api.github.com**, tap **Allow** (or **Always Allow**). Without this, the automation fails silently when it runs on its own. The test run arrives without an amount; Ledgerline lists it as unreadable and removes it with one tap.
 
-**Test it**: pay for something small with Apple Pay, then open Ledgerline. A banner shows the payment, or it's already added. Running the automation by hand doesn't work, because without a real payment there's no amount or shop.
+**Online and in-app Apple Pay** don't trigger the automation: iOS only offers it for tapping your iPhone or Watch at a terminal. Add online purchases with quick-add, or let the monthly statement import catch them.
+
+**Test it**: pay for something small with Apple Pay at a shop terminal, then open Ledgerline. A banner shows the payment, or it's already added. Running the automation by hand doesn't work, because without a real payment there's no amount or shop.
+
+**Checking what arrived**: **Check for payments now** in Ledgerline shows the time of the last check, how many payments are waiting, and anything that arrived without an amount (with a sample of what came in). To test only the connection, tap ▶ in the automation: Shortcuts then shows GitHub's answer (a block of text with an `"id"` means it worked; "Bad credentials" or "Not Found" mean the token or address is wrong). A hand-run arrives without an amount, which Ledgerline lists as unreadable; remove it with one tap.
 
 **If nothing arrives**: on the iPhone open **Settings → Apps → Wallet** and turn on **Mobile Data**; check the automation still says **Run Immediately**; use **Check for payments now** in Ledgerline; and if you ever replace your GitHub token, paste the new one into the automation as well. While a payment waits for Ledgerline it sits unencrypted on your sync file (amount and shop only), and it's deleted as soon as it's picked up.
 
