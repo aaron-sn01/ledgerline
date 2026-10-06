@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-06 · 41. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-06 · 47. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -175,6 +175,7 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 Ledgerline behandelt alle Konten als eine Summe. Das Budget des laufenden Monats wird davon zurückgehalten; der Rest zählt als Ersparnisse.
 
 - Summe korrigieren: **Vermögen → Ersparnisse → Saldo aktualisieren**, optional mit jedem Konto einzeln. Beim ersten Konto bleibt deine bisherige Summe als Zeile „Meine bisherigen Konten“ erhalten, damit nichts verloren geht; teile sie auf, wann immer du willst.
+- **Konten bleiben aktuell**: Geld, das du den Ersparnissen hinzufügst oder entnimmst (Zinsen, aus Ersparnissen Bezahltes, Tilgungen, Verkäufe), wird dem Konto mit derselben Währung zugerechnet. Gibt es noch keins in dieser Währung, wird eins angelegt (etwa „CAD-Konto“), damit „Je Währung“ es in dieser Währung zeigt. **Saldo aktualisieren** öffnet sich deshalb mit dem aktuellen Stand jedes Kontos, und Summe, Ersparnisse und **Je Währung** stimmen immer überein. Korrigiere dort ein Konto, dann ist das sein neuer Ausgangspunkt.
 - **Neues Sparkonto**: einfach als weitere Zeile hinzufügen. Überweisungen zwischen eigenen Konten sind nie Ausgaben; der Import überspringt sie.
 - Zinsen kommen als **Einnahme → Ersparnisse** hinein; der Import erledigt das bei Zinszeilen automatisch.
 
@@ -187,7 +188,7 @@ Alles wird in deiner **Heimatwährung** angezeigt (die Einrichtung fragt danach;
 - **Konten**: Unter **Saldo aktualisieren** bekommt jedes Konto eine Währung; die Summe wird umgerechnet.
 - **Positionen**: Jede Position hat eine Kurswährung, aus der Kursdatei (ein US-Fonds in USD) oder im Dialog gewählt. Der Wert wird zum heutigen Kurs umgerechnet, der Verlauf zum Kurs jedes Tages.
 - **Schulden**: Beim Anlegen die Währung wählen. Die Karte zeigt Beträge in dieser Währung plus die umgerechnete Summe; Tilgungen werden zum Tageskurs umgerechnet.
-- **Vermögen**: Oben in der Box Vermögen wechselst du zwischen **Alles in [Heimatwährung]** und **Je Währung** (nebeneinander, nicht umgerechnet), dazu ein Diagramm **Währungen** unter Anlageklassen. Aufzuteilen gibt es erst etwas, wenn ein Konto, eine Position oder eine Schuld eine andere Währung hat.
+- **Vermögen**: Das Vermögen wird zu aktuellen EZB-Kursen in deine Heimatwährung umgerechnet; darunter steht, sobald du mehr als eine Währung hältst, **jede Währung für sich**, nicht umgerechnet (Positionen in ihrer Kurswährung, Konten, Schulden). Das Diagramm **Währungen** unter Anlageklassen zeigt dasselbe Geld nach Währung aufgeteilt.
 - **Heimatwährung ändern** rechnet Einträge zum Kurs ihres Tages um; Plan, Positionen, Konten und Schulden behalten ihre Währung und werden automatisch umgerechnet.
 - **Wechselkurse** sind die offiziellen täglichen EZB-Referenzkurse (etwa 30 Währungen, darunter USD, GBP, CHF, CAD und SGD), dazu VAE-Dirham, Saudi- und Katar-Riyal, Omanischer Rial sowie Bahrain- und Jordanischer Dinar über ihre offizielle feste Bindung an den US-Dollar, geladen von frankfurter.app und auf dem Gerät gespeichert, sodass die App offline mit den letzten Kursen funktioniert. **Aktualisieren** bei der Währungseinstellung lädt sie neu.
 
@@ -201,12 +202,26 @@ Mit nur einer Währung ändert sich nichts: Jede Zahl ist genau wie vorher.
 
 ## 9. Sync zwischen Geräten
 
-- **Nur das erste Gerät** erstellt die Sync-Datei: Sync-ID leer lassen, GitHub-Token und eine Passphrase eingeben, **Sync-Datei erstellen**. Die **Sync-ID** steht danach im selben Feld, mit einer **Kopieren**-Taste, und bleibt dort sichtbar.
-- **Jedes weitere Gerät**: dasselbe Token, **diese** Sync-ID und dieselbe Passphrase, dann **Verbinden**. Auf einem neuen Gerät führt dich die Einrichtung über „Ich nutze Ledgerline schon auf einem anderen Gerät“ direkt dorthin.
+Sync hält deine Geräte über eine verschlüsselte Datei in **deinem eigenen kostenlosen GitHub-Konto** auf demselben Stand. Ohne Sync funktioniert alles auf einem Gerät; mit Sync zeigen Handy und Laptop dieselben Daten. Du richtest es einmal ein, in etwa 10 Minuten.
+
+**A. GitHub-Konto anlegen** (überspringen, wenn du eins hast)
+
+1. Geh auf **github.com/signup**, gib E-Mail, Passwort und Benutzernamen ein und folge den Schritten.
+2. Bestätige deine E-Mail-Adresse mit dem Code oder Link, den GitHub schickt.
+
+**B. Token erstellen** (der Schlüssel, mit dem Ledgerline deine Sync-Datei erreicht)
+
+1. Angemeldet bei GitHub öffnest du **github.com/settings/tokens/new**. Falls GitHub nach der Art fragt, wähle **Tokens (classic)**.
+2. **Note**: „Ledgerline“ eingeben. **Expiration**: **No expiration** wählen.
+3. In der Liste der Berechtigungen **nur gist** anhaken. Sonst nichts.
+4. Unten auf **Generate token** klicken. Kopiere das Token (beginnt mit `ghp_`) und speichere es im Passwortmanager: GitHub zeigt es nur einmal.
+
+**C. Geräte verbinden**
+
+- **Erstes Gerät**: In Ledgerline **Einstellungen → Sync zwischen Geräten**: Token einfügen, eine Passphrase wählen (mindestens 8 Zeichen; im Passwortmanager speichern, sie lässt sich nicht wiederherstellen), **Sync-ID** leer lassen und **Sync-Datei erstellen** klicken. Die **Sync-ID** erscheint dann im selben Feld mit einer **Kopieren**-Taste und bleibt dort sichtbar; sie ist auch der Code am Ende der Adresse der Sync-Datei auf gist.github.com.
+- **Jedes weitere Gerät**: dasselbe Token, **diese** Sync-ID und dieselbe Passphrase, dann **Verbinden**. Auf einem neuen Gerät führt „Ich nutze Ledgerline schon auf einem anderen Gerät“ in der Einrichtung direkt dorthin.
 - Alle Geräte müssen **dieselbe Sync-ID** zeigen. Weicht eine ab, dort **Dieses Gerät trennen** und mit der richtigen ID verbinden; die Daten werden zusammengeführt.
-- Token, Sync-ID und Passphrase gehören in den Passwortmanager. Die Passphrase lässt sich nicht wiederherstellen.
-- Das Token ist ein klassisches GitHub-Token nur mit der Berechtigung **gist**.
-- **Sprache**: Englisch oder Deutsch unter **Einstellungen → Budget → Sprache**.
+- Jede Person nutzt ihr eigenes Konto und Token; gib deins nie weiter.
 
 ## 10. App-Sperre
 

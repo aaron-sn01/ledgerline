@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-06 · 41. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-06 · 47. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -171,7 +171,7 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 - **Spending categories**: **Settings → Categories**. Add, rename, recolor or delete them. The amount box next to each is an optional monthly limit; leave it empty for none.
 - **Fixed-cost groups** (Housing, Insurance and so on): **Settings → Fixed-cost groups**.
 - **Wealth over time**: choose 1M, 3M, 6M, 1Y or All. The summary above the chart counts only from the day you started tracking. Anything earlier (the dashed line) is an estimate made from your current holdings at past prices, so it shows how the market moved, not how much you actually had.
-- **Language**: English or German, under **Settings → Budget → Language** (also offered on the wizard's first screen). German shows dates as 06.10.2026 and can switch numbers to 1.234,56 €. The Manual page shows the German version.
+- **Language**: English or German, under **Settings → Budget → Language** (also offered on the wizard's first screen). German shows dates as 06.10.2026, decimals with a comma, and can switch numbers to 1.234,56 €. Default names (categories, asset classes, fixed-cost groups) switch language too; names you chose yourself stay as they are. The Manual page shows the German version.
 - **Finding a setting**: use the search box or the group buttons (Plan, Money, Investments, Devices, Advanced) at the top of Settings.
 - **Settings layout**: Recurring plan spans the full width; the other boxes flow in two columns (one on a phone).
 - **Box layout**: tap a box's title to collapse it. **Rearrange boxes** at the bottom of each page lets you drag boxes around. Both are remembered per device.
@@ -181,6 +181,7 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 Ledgerline treats all your accounts as one cash total. A month's budget is kept aside from that total until the month ends; the rest counts as cash savings.
 
 - To correct the total: **Wealth → Cash savings → Update balance**. You can list each account separately and the total adds up by itself. When you add your first account, your existing total is kept as a row "My accounts so far", so nothing is lost; split it into separate accounts whenever you like.
+- **Accounts stay current**: money you add to or take from cash savings (interest, spending paid from savings, repayments, sales) is added to the account with the same currency. If you have none in that currency yet, one is created for you (for example "CAD account"), so Each currency shows it as that currency. **Update balance** therefore opens with each account's current balance, and the total, the savings line and **Each currency** always agree. Correct any account there; that becomes its new starting point.
 - **Opening a savings account** changes nothing in how Ledgerline works: add it as another account row in **Update balance**. Moving money between your own accounts is never spending; the importer skips such transfers.
 - Interest goes in as **Money in → Cash savings**. The importer does this automatically for interest lines.
 
@@ -193,7 +194,7 @@ Everything is shown in your **home currency** (the setup wizard asks for it; cha
 - **Accounts**: in **Update balance**, each account gets a currency; the total is converted.
 - **Holdings**: each holding has a price currency, taken from the price file (a US-listed fund in USD) or chosen in its dialog. Its value is converted at today's rate, its history at each day's rate.
 - **Debts**: choose the debt's currency when adding it. Its card shows amounts in that currency, plus the converted total; repayments are converted at the day's rate.
-- **Wealth**: at the top of the Net worth box, switch between **All in [home currency]** and **Each currency** (side by side, not converted), plus a **Currencies** chart under Asset types. The view only has something to split once an account, holding or debt has another currency.
+- **Wealth**: the net worth is converted into your home currency at current ECB rates; below it, as soon as you hold more than one currency, **each currency is listed on its own**, not converted (holdings in their price currency, accounts, debts). The **Currencies** chart under Asset types shows the same money split by currency.
 - **Changing the home currency** converts entries at the rate of their own day; plan items, holdings, accounts and debts keep their currency and are converted automatically.
 - **Exchange rates** are the ECB's official daily reference rates (about 30 currencies, including USD, GBP, CHF, CAD and SGD), plus the UAE dirham, Saudi and Qatari riyal, Omani rial and Bahraini and Jordanian dinar through their official fixed peg to the US dollar, loaded from frankfurter.app and kept on the device, so the app works offline with the last known rates. **Refresh** under the currency setting loads them again.
 
@@ -207,11 +208,26 @@ With only one currency in use, nothing changes: every number is exactly as befor
 
 ## 9. Sync between devices
 
-- **Only the first device** creates the sync file: leave Sync ID empty, enter your GitHub token and a passphrase, and click **Create sync file**. The **Sync ID** then appears in that same box with a **Copy** button, and stays visible there; it's also the code at the end of the sync file's address on gist.github.com.
-- **Every other device**: enter the same token, **that** Sync ID and the same passphrase, then click **Connect**.
+Sync keeps your devices in step through an encrypted file in **your own free GitHub account**. Without it, everything works on one device; with it, phone and laptop show the same data. You set it up once, in about 10 minutes.
+
+**A. Create a GitHub account** (skip if you have one)
+
+1. Go to **github.com/signup**, enter your email, a password and a username, and follow the steps.
+2. Confirm your email address with the code or link GitHub sends you.
+
+**B. Create a token** (the key Ledgerline uses to reach your sync file)
+
+1. Signed in to GitHub, open **github.com/settings/tokens/new**. If GitHub asks which kind, choose **Tokens (classic)**.
+2. **Note**: type "Ledgerline". **Expiration**: choose **No expiration**.
+3. Under the list of permissions, tick **only gist**. Nothing else.
+4. Click **Generate token** at the bottom. Copy the token (it starts with `ghp_`) and save it in your password manager: GitHub shows it only once.
+
+**C. Connect your devices**
+
+- **First device**: in Ledgerline, **Settings → Sync between devices**: paste the token, choose a passphrase (at least 8 characters; save it in your password manager, it can't be recovered), leave **Sync ID** empty, and click **Create sync file**. The **Sync ID** then appears in that box with a **Copy** button and stays visible there; it's also the code at the end of the sync file's address on gist.github.com.
+- **Every other device**: the same token, **that** Sync ID and the same passphrase, then **Connect**. On a new device, the setup wizard's "I already use Ledgerline on another device" leads straight there.
 - All devices must show the **same Sync ID**. If one differs, click **Disconnect this device** there and connect with the right ID; its data is merged in.
-- Keep the token, Sync ID and passphrase in your password manager. The passphrase cannot be recovered.
-- The token is a classic GitHub token with only the **gist** permission.
+- Each person uses their own account and token; never share yours.
 
 ## 10. App lock
 
