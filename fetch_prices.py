@@ -25,11 +25,20 @@ for entry in config["tickers"]:
     symbol = entry["symbol"]
     for attempt in range(3):
         try:
-            hist = yf.Ticker(symbol).history(period="400d", interval="1d", auto_adjust=False, timeout=20)
+            tk = yf.Ticker(symbol)
+            hist = tk.history(period="400d", interval="1d", auto_adjust=False, timeout=20)
             hist = hist.dropna(subset=["Close"])
             if hist.empty:
                 raise ValueError("no data returned")
             closes = {d.strftime("%Y-%m-%d"): round(float(c), 4) for d, c in hist["Close"].items()}
+            # The currency the price is quoted in. London lines quote in pence ("GBp"): convert to pounds.
+            try:
+                currency = (tk.fast_info.get("currency") or entry.get("currency") or "EUR")
+            except Exception:
+                currency = entry.get("currency") or "EUR"
+            if currency in ("GBp", "GBX"):
+                closes = {d: round(v / 100, 4) for d, v in closes.items()}
+                currency = "GBP"
             days = sorted(closes)
             quotes[symbol] = {
                 "isin": entry.get("isin"),
@@ -37,6 +46,7 @@ for entry in config["tickers"]:
                 "price": closes[days[-1]],
                 "prevClose": closes[days[-2]] if len(days) > 1 else closes[days[-1]],
                 "date": days[-1],
+                "currency": currency.upper(),
                 "history": closes,
             }
             break

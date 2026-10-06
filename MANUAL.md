@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-06 · 21. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-06 · 26. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -31,7 +31,10 @@ Your data (entries, plan, holdings, debts, settings) is stored inside the app on
 5. **Apple Pay, automatically**: set up the Shortcuts automation once (**Settings → Apple Pay automation**, steps below) and every Apple Pay payment arrives in Ledgerline by itself, either for you to confirm or added straight away.
 6. **Undo**: after deleting something or importing, an **Undo** button appears for a few seconds.
 7. **Help**: every box has a **?** next to its title that explains what it shows.
-8. **Back up**: after each monthly review, go to **Settings → Backup & export → Download backup** and keep the file in iCloud Drive or similar.
+8. **Tour**: **Settings → Backup & export → Take the tour** (or **More → Take the tour** on iPhone) walks through the app in 9 stops. "Look around first" in the setup wizard runs it on sample data; **Set up my own** clears the sample data and starts the setup.
+9. **Setup help for your AI**: on the Manual page and in **Settings → Backup & export**. A text to give ChatGPT, Claude or similar; it guides you through installing, sync and the Apple Pay automation one step at a time, and never asks for your token, passphrase or bank data.
+10. **What's new**: after each update, a short note lists the changes once.
+11. **Back up**: after each monthly review, go to **Settings → Backup & export → Download backup** and keep the file in iCloud Drive or similar.
 
 ### Setting up the Apple Pay automation (iPhone, once)
 
@@ -62,6 +65,33 @@ Your data (entries, plan, holdings, debts, settings) is stored inside the app on
 **Test it**: pay for something small with Apple Pay, then open Ledgerline. A banner shows the payment, or it's already added. Running the automation by hand doesn't work, because without a real payment there's no amount or shop.
 
 **If nothing arrives**: on the iPhone open **Settings → Apps → Wallet** and turn on **Mobile Data**; check the automation still says **Run Immediately**; use **Check for payments now** in Ledgerline; and if you ever replace your GitHub token, paste the new one into the automation as well. While a payment waits for Ledgerline it sits unencrypted on your sync file (amount and shop only), and it's deleted as soon as it's picked up.
+
+## Sharing Ledgerline with friends and family
+
+Anyone can use Ledgerline through your link (https://aaron-sn01.github.io/ledgerline/). Their data stays on their own devices; nobody sees anyone else's, including you.
+
+1. Send them the link. On iPhone they open it in Safari, tap **Share → Add to Home Screen**. On a Mac in Safari: **File → Add to Dock**.
+2. The **setup wizard** opens the first time: name, currency, monthly income, fixed costs, investment plans, cash and savings goal. Every step can be skipped; everything can be changed later in Settings (**Settings → Backup & export → Run the setup again** reopens it).
+3. For sync between their own devices and the Apple Pay automation, they use **their own** GitHub account and token (sections 9 and 2).
+4. When you upload a new version, they get it automatically the next time they open the app. Their data is upgraded on first launch, like yours.
+5. ETF prices come from your `tickers.json`. If someone holds a fund that isn't listed, add it (section 5) or they enter its price by hand.
+
+### Banks Ledgerline doesn't know yet
+
+The importer has dedicated readers for Trade Republic, Sparkasse, flatex and Coinbase. For any other bank it makes a best effort: every line with a date and an amount is offered in the review, marked "layout not known yet: please check each line". Check direction (spent or received), amount and name before adding. To get a proper reader for a bank, send a sample screenshot or PDF with personal details blacked out to whoever maintains the app; it's added in the next update, for everyone with that bank.
+
+### Privacy and security
+
+- **Stored on the device only**, in the browser's storage. There is no Ledgerline server or account; whoever shared the app can't see anyone's data.
+- **Not encrypted on the device itself**; it's protected by the device lock. Add Face ID, Touch ID or a PIN under **Settings → App lock** for extra protection.
+- **Sync is optional and end-to-end encrypted** with your passphrase before it reaches your own GitHub account. Lose the passphrase and the sync copy can't be recovered.
+- **Imports are read on the device**; files are never uploaded. The reading tools are downloaded once from public code servers (cdnjs, jsDelivr).
+- **Prices** come from a public GitHub file and CoinGecko. These requests contain no personal data, but like any web request they reveal your internet address.
+- **Apple Pay automation** (optional): amount and shop name wait unencrypted in your own GitHub sync file briefly, then are deleted.
+- **Backups are your job**: clearing browser data or removing the home-screen app deletes the data on that device.
+- **Trust**: the code is public. Updates come from whoever maintains the app.
+
+The same text is shown in the setup wizard and under **Settings → Backup & export**.
 
 ## 3. Updating the app to a new version
 
@@ -120,6 +150,7 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 - **Spending categories**: **Settings → Categories**. Add, rename, recolor or delete them. The amount box next to each is an optional monthly limit; leave it empty for none.
 - **Fixed-cost groups** (Housing, Insurance and so on): **Settings → Fixed-cost groups**.
 - **Wealth over time**: the summary above the chart counts only from the day you started tracking. Anything earlier (the dashed line) is an estimate made from your current holdings at past prices, so it shows how the market moved, not how much you actually had.
+- **Language**: English or German, under **Settings → Budget → Language** (also offered on the wizard's first screen). German shows dates as 06.10.2026 and can switch numbers to 1.234,56 €. The Manual page shows the German version.
 - **Finding a setting**: use the search box or the group buttons (Plan, Money, Investments, Devices, Advanced) at the top of Settings.
 - **Settings layout**: Recurring plan spans the full width; the other boxes flow in two columns (one on a phone).
 - **Box layout**: tap a box's title to collapse it. **Rearrange boxes** at the bottom of each page lets you drag boxes around. Both are remembered per device.
@@ -132,6 +163,21 @@ Ledgerline treats all your accounts as one cash total. A month's budget is kept 
 - **Opening a savings account** changes nothing in how Ledgerline works: add it as another account row in **Update balance**. Moving money between your own accounts is never spending; the importer skips such transfers.
 - Interest goes in as **Money in → Cash savings**. The importer does this automatically for interest lines.
 
+## Currencies
+
+Everything is shown in your **home currency** (the setup wizard asks for it; change it under **Settings → Budget → Currency**). If you live, earn or invest in more than one currency, tick **I use more than one currency** under it. Then:
+
+- **Entries**: a currency picker sits next to the amount on Today and in the entry editor. A £12.00 purchase is saved as £12.00 and converted at that day's rate; the original amount stays visible in the entry list.
+- **Plan**: each income, fixed cost and investment plan can have its own currency (a CHF salary, rent in GBP). The month's budget uses the rate on the payment day; until then today's rate.
+- **Accounts**: in **Update balance**, each account gets a currency; the total is converted.
+- **Holdings**: each holding has a price currency, taken from the price file (a US-listed fund in USD) or chosen in its dialog. Its value is converted at today's rate, its history at each day's rate.
+- **Debts**: choose the debt's currency when adding it. Its card shows amounts in that currency, plus the converted total; repayments are converted at the day's rate.
+- **Wealth**: switch between **All in [home currency]** and **Each currency** (side by side, not converted), plus a **Currencies** chart under Asset types.
+- **Changing the home currency** converts entries at the rate of their own day; plan items, holdings, accounts and debts keep their currency and are converted automatically.
+- **Exchange rates** are the ECB's official daily reference rates (about 30 currencies), loaded from frankfurter.app and kept on the device, so the app works offline with the last known rates. **Refresh** under the currency setting loads them again.
+
+With only one currency in use, nothing changes: every number is exactly as before.
+
 ## 8. Debt
 
 - **Debt → Add a debt**: enter the amount left, the interest rate (0 for interest-free) and optionally a target date.
@@ -140,7 +186,7 @@ Ledgerline treats all your accounts as one cash total. A month's budget is kept 
 
 ## 9. Sync between devices
 
-- **Only the first device** creates the sync file: leave Sync ID empty, enter your GitHub token and a passphrase, and click **Create sync file**.
+- **Only the first device** creates the sync file: leave Sync ID empty, enter your GitHub token and a passphrase, and click **Create sync file**. The **Sync ID** then appears in that same box with a **Copy** button, and stays visible there; it's also the code at the end of the sync file's address on gist.github.com.
 - **Every other device**: enter the same token, **that** Sync ID and the same passphrase, then click **Connect**.
 - All devices must show the **same Sync ID**. If one differs, click **Disconnect this device** there and connect with the right ID; its data is merged in.
 - Keep the token, Sync ID and passphrase in your password manager. The passphrase cannot be recovered.
@@ -167,7 +213,7 @@ Read this section before changing anything. The owner is not a programmer: give 
 
 - The app is a single self-contained `index.html`: vanilla JavaScript, no framework, no build step, no package manager. Keep it that way.
 - External code is only loaded lazily, when needed, from cdnjs.cloudflare.com or cdn.jsdelivr.net: PDF.js for PDF text and Tesseract.js for screenshot OCR. Everything else is inline.
-- Network access is limited to: the GitHub API (encrypted Gist sync), `prices.json` and `compositions.json` from the same repository (raw.githubusercontent.com first, then the same origin), CoinGecko for crypto, and the two CDNs. No analytics and no other servers.
+- Network access is limited to: the GitHub API (encrypted Gist sync), ECB exchange rates from frankfurter.app, `prices.json` and `compositions.json` from the same repository (raw.githubusercontent.com first, then the same origin), CoinGecko for crypto, and the two CDNs. No analytics and no other servers.
 - Personal data stays on the device. Imports are parsed locally.
 - **The repository is public. Never write personal data into the code** (no names, amounts, holdings or share counts in seed data, defaults or examples). `seedPlan`, `seedHoldings` and `seedDebts` are deliberately empty; a new device is filled by sync or a backup.
 - UI text is American English. **Dates are always displayed day/month/year** (05/10/2026), via `fmtDate`, `fmtDateTime` and the date-box enhancer. Never show month/day.
@@ -179,13 +225,13 @@ The file is a sequence of blocks, in this order. Later blocks may use earlier on
 1. `<head>` and `<style>`: design tokens as CSS variables (light and dark), layout, components, print styles for the PDF summary.
 2. Core script: constants and storage keys, formatting helpers (money in integer cents, `fmt`, `fmtDate`), icons, categories and seed data, `defaultState` and `migrate`, the budget engine (`computeMonth`, `aggregate`, weekday model, odds simulation), cash (`cashSavings`, cash outlook), wealth (`wealth`, `wealthSeries`, prices via `Prices`), debt (`debtLedger`, `debtStatus`, `debtPlansFor`), projection (Monte Carlo), diversification, charts (`sankeySVG`, `flowNodes`, and others), sync (`Sync`, AES-GCM with a PBKDF2 key) and app lock (`Lock`, WebAuthn and PIN).
 3. UI script: `render()`, one `view…()` function per page, dialogs, the `ACTIONS` map (every button has `data-act="name"`), input binding, collapsible boxes (`decoratePanels`).
-4. Importer: `ImportCore.parse` (pure parsers per document type: Trade Republic, Sparkasse, flatex, Coinbase), classification in `buildProposals` (transfers, fixed-cost and plan matching, refunds, duplicates, categories), and the review dialog. Duplicates are found with `align()`, an order-preserving one-to-one pairing of same-amount, similar-name entries within 2 days (and 15 minutes when both have a time); entries from the same file are never paired. Don't replace this with a simple "same amount within a few days" check: it merges repeated purchases.
+4. Importer: `IMP` (pure parsers per document type, plus `IMP.genericPdf` as a best-effort fallback for unknown banks: Trade Republic, Sparkasse, flatex, Coinbase), classification in `buildProposals` (transfers, fixed-cost and plan matching, refunds, duplicates, categories), and the review dialog. Duplicates are found with `align()`, an order-preserving one-to-one pairing of same-amount, similar-name entries within 2 days (and 15 minutes when both have a time); entries from the same file are never paired. Don't replace this with a simple "same amount within a few days" check: it merges repeated purchases.
 5. PDF summary: section builders and fit-to-one-page printing.
 6. Overview: savings rate and goal, typical month, category trends and limits, Ways to save, net-worth change, the More sheet.
    Extras (after the date boxes and the manual): the Apple Pay inbox (`Inbox`: reads and deletes comments of the form `ledgerline|amount|merchant` on the sync Gist and feeds them through the normal import review), "?" help (`HELP`, one text per box title, plus `HELP_BY_VIEW` for boxes titled with the user's own text; every new box needs an entry), Settings search and groups, `Undo`, nudges, and milestone celebrations. They hook in through `window.AFTER_RENDER`, a list of functions that runs after every render.
 7. Arrange mode: drag-and-drop box order (`applyLayout`).
 8. Date boxes: replaces native date inputs with day/month/year text boxes.
-9. Manual (this text) and extras (see above).
+9. Manual (this text, plus `MANUAL_DE`, the German user manual), extras (see above), the setup wizard (`openWizard`), which opens once on a device without data or sync, and German (`DE`, `DE_BLOCK`, `DE_PAT`, `HELP_DE`). The interface is written in English; with German selected, a translation pass swaps every rendered text: whole formatted paragraphs (`DE_BLOCK`), single texts (`DE`), then sentences with numbers (`DE_PAT`, regular expressions). Untranslated text stays English. **New or changed English text needs a matching German entry**; the source dictionaries are in `i18n/` in the working files (generated into the `DE…` constants).
 10. Boot: starts sync, the lock and the first render. It must stay the final script.
 
 ### Data model
@@ -198,6 +244,8 @@ Stored in localStorage under `ledgerline:data:v2` (UI state under `ledgerline:ui
 - `transactions`: `{ id: { name, amount, date, type, category, … } }`. `type` is `out` (spending), `in` (money in), `invest` (with `accountId` and `source` budget, bonus or savings), `debt` (with `debtId`), or `sell` (with shares, gross, tax and fees).
 - `holdings`: `{ id: { name, isin, symbol, kind, assetClass, broker, base: { shares, date, at }, manualPrice, coingeckoId } }`. Share counts are `base` plus plan executions and transactions after `base.date`.
 - `debts`: `{ id: { name, original, rate, plan: { on, amount, day, start }, base: { balance, date }, target } }`.
+
+Currencies (`4m_fx` block): every amount is stored in the home currency (`settings.currency`); an entry in another currency also keeps `cur` and `orig` (original cents). Plan items, holdings (`cur`, else the price file's `currency`, else a guess from the symbol), cash accounts and debts can carry `cur` and are converted when read (`fxPlan`, `quoteOf`/`priceOn` wrappers, `debtTxAmount`, `totalDebt`). Rates: `FX.rate(cur, iso)` (EUR-based, latest published day on or before the date), `fxConv(cents, from, to, iso)`. With no foreign `cur` anywhere, conversion returns its input unchanged; keep it that way. `fetch_prices.py` stores each quote's `currency` (London pence converted to pounds).
 
 Rules: amounts are integers in cents; dates are stored as ISO `YYYY-MM-DD`; every object carries `updatedAt`; deleting sets `deleted: true` (needed for sync, which merges per object, last write wins). Never rename storage keys.
 
@@ -215,4 +263,4 @@ GitHub Actions runs `fetch_prices.py` every 2 hours on weekdays, and `fetch_comp
 
 ### Handing back a change
 
-Return the complete updated `index.html`, plus any other changed files, with upload steps. **Every change to the app must come with an updated manual**: edit `MANUAL.md` and the copy embedded in `index.html` (the `MANUAL_MD` constant) together, raise `APP_VERSION` (shown in Settings) and the version line at the top of this manual to the same value. Keep features working that the owner relies on: the importer, the Apple Pay inbox, sync, app lock, the savings-rate goal in the budget, day/month/year dates, and collapsed and arranged boxes.
+Return the complete updated `index.html`, plus any other changed files, with upload steps. **Every new version adds an entry at the top of `CHANGELOG`** (shown once as "What's new"). **Significant new features also update the tour** (`TOUR_STEPS`, English and German) and, where relevant, the setup help (`SETUP_HELP_EN`, `SETUP_HELP_DE`); small fixes don't. **Every change to the app must come with an updated manual**: edit `MANUAL.md` and the copy embedded in `index.html` (the `MANUAL_MD` constant) together, raise `APP_VERSION` (shown in Settings) and the version line at the top of this manual to the same value. Keep features working that the owner relies on: the importer, the Apple Pay inbox, sync, app lock, the savings-rate goal in the budget, day/month/year dates, and collapsed and arranged boxes.
