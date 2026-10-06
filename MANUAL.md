@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-06 · 29. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-06 · 31. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -26,7 +26,7 @@ Your data (entries, plan, holdings, debts, settings) is stored inside the app on
 2. **Import instead of typing**: tap **Import** and choose screenshots or PDF statements (Trade Republic, Sparkasse, flatex, Coinbase). Check the review list, untick what you don't want, then tap **Add selected**.
    - **Duplicates**: an entry that's already in Ledgerline, or that appears in two of the files you import, is unticked with a note saying which entry it matches. Repeated purchases (several €3.00 tickets) are counted separately: each entry can only match one other, payments in the same file never count as duplicates, and different times of day (Apple Pay) mean different payments. If something is unticked wrongly, tick it.
    - **Paste instead of saving**: take a screenshot, tap its thumbnail, then **Done → Copy and Delete**. In Ledgerline tap **Import → Paste screenshot** (if the iPhone asks, tap **Allow Paste**). If the button doesn't work, tap the dashed box next to it and choose **Paste**. On a Mac, ⌘V works while the Import window is open.
-3. **Browse days**: the app always opens on the Overview. On Today, use the arrows next to the date to see earlier or later days. New entries go on the day you're looking at.
+3. **Browse days**: the app always opens on the Overview, also when you come back to it after more than 10 minutes (shorter trips to another app keep your place). On Today, use the arrows next to the date to see earlier or later days. New entries go on the day you're looking at.
 4. **Monthly review**: opens by itself after a month ends. Correct share counts and your cash total there.
 5. **Apple Pay, automatically**: set up the Shortcuts automation once (**Settings → Apple Pay automation**, steps below) and every Apple Pay payment arrives in Ledgerline by itself, either for you to confirm or added straight away.
 6. **Undo**: after deleting something or importing, an **Undo** button appears for a few seconds.

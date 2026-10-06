@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-06 · 29. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-06 · 31. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -26,7 +26,7 @@ Deine Daten (Einträge, Plan, Positionen, Schulden, Einstellungen) liegen in der
 2. **Importieren statt tippen**: Tippe auf **Importieren** und wähle Screenshots oder PDF-Auszüge (Trade Republic, Sparkasse, flatex, Coinbase). Prüfe die Liste, entferne Häkchen bei allem, was du nicht willst, und tippe auf **Ausgewählte hinzufügen**.
    - **Doppelte Einträge**: Was schon in Ledgerline ist oder in zwei importierten Dateien vorkommt, wird mit einem Hinweis abgewählt. Wiederholte Käufe (mehrere Fahrscheine zu 3,00 €) zählen einzeln: Jeder Eintrag kann nur zu einem anderen passen, Zahlungen aus derselben Datei gelten nie als doppelt, und unterschiedliche Uhrzeiten (Apple Pay) bedeuten unterschiedliche Zahlungen. Ist etwas zu Unrecht abgewählt, setz das Häkchen.
    - **Einfügen statt speichern**: Screenshot machen, auf die Vorschau tippen, dann **Fertig → Kopieren und löschen**. In Ledgerline auf **Importieren → Screenshot einfügen** tippen (falls das iPhone fragt: **Einfügen erlauben**). Klappt die Taste nicht, tippe in das gestrichelte Feld daneben und wähle **Einfügen**. Auf dem Mac funktioniert ⌘V, solange das Importfenster offen ist.
-3. **Tage durchblättern**: Die App öffnet immer mit der Übersicht. Auf der Seite Heute blätterst du mit den Pfeilen neben dem Datum zu früheren oder späteren Tagen. Neue Einträge landen an dem Tag, den du gerade ansiehst.
+3. **Tage durchblättern**: Die App öffnet immer mit der Übersicht, auch wenn du nach mehr als 10 Minuten zurückkehrst (kürzere Abstecher in eine andere App behalten deine Stelle). Auf der Seite Heute blätterst du mit den Pfeilen neben dem Datum zu früheren oder späteren Tagen. Neue Einträge landen an dem Tag, den du gerade ansiehst.
 4. **Monatsrückblick**: öffnet sich nach Monatsende von selbst. Korrigiere dort Anteile und deine Kontosumme.
 5. **Apple Pay automatisch**: Richte einmal die Kurzbefehle-Automation ein (**Einstellungen → Apple-Pay-Automation**, Schritte unten). Dann kommt jede Apple-Pay-Zahlung von selbst in Ledgerline an, zum Bestätigen oder direkt eingetragen.
 6. **Rückgängig**: Nach dem Löschen oder Importieren erscheint für ein paar Sekunden **Rückgängig**.
