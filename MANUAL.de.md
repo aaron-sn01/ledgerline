@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-06 · 34. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-06 · 37. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -24,11 +24,13 @@ Deine Daten (Einträge, Plan, Positionen, Schulden, Einstellungen) liegen in der
 
 1. **Ausgaben erfassen** auf der Seite Heute: Name und Betrag eingeben. Ledgerline schlägt eine Kategorie vor; tippe auf eine andere, wenn sie nicht passt. Es lernt aus jeder Korrektur.
 2. **Importieren statt tippen**: Tippe auf **Importieren** und wähle Screenshots oder PDF-Auszüge (Trade Republic, Sparkasse, flatex, Coinbase). Prüfe die Liste, entferne Häkchen bei allem, was du nicht willst, und tippe auf **Ausgewählte hinzufügen**.
+   - **Trade-Republic-Screenshots**: die Umsatzliste (alles unter „Anstehend“ wird übersprungen, weil es noch nicht passiert ist; die wöchentlichen Saveback- und Aufrundungs-Einträge zählen) oder **eine geöffnete Zahlung** (praktisch für einen einzelnen Kauf; ihre „Vorteile“ bleiben außen vor, weil Trade Republic Saveback und Aufrundungen einmal pro Woche gesammelt zahlt und die Liste diesen Wocheneintrag zeigt).
+   - **Sparkasse-Screenshots**: die Umsatzliste oder **eine geöffnete Zahlung** („Umsatzdetails“): Name, Betrag, Buchungsdatum und Verwendungszweck werden gelesen. Ist es eine deiner Fixkosten (etwa die Handyrechnung von Telefonica, also O2), wird sie erkannt und übersprungen, weil der Plan sie schon zählt.
    - **Doppelte Einträge**: Was schon in Ledgerline ist oder in zwei importierten Dateien vorkommt, wird mit einem Hinweis abgewählt. Wiederholte Käufe (mehrere Fahrscheine zu 3,00 €) zählen einzeln: Jeder Eintrag kann nur zu einem anderen passen, Zahlungen aus derselben Datei gelten nie als doppelt, und unterschiedliche Uhrzeiten (Apple Pay) bedeuten unterschiedliche Zahlungen. Ist etwas zu Unrecht abgewählt, setz das Häkchen.
    - **Einfügen statt speichern**: Screenshot machen, auf die Vorschau tippen, dann **Fertig → Kopieren und löschen**. In Ledgerline auf **Importieren → Screenshot einfügen** tippen (falls das iPhone fragt: **Einfügen erlauben**). Klappt die Taste nicht, tippe in das gestrichelte Feld daneben und wähle **Einfügen**. Auf dem Mac funktioniert ⌘V, solange das Importfenster offen ist.
 3. **Tage durchblättern**: Die App öffnet immer mit der Übersicht, auch wenn du nach mehr als 10 Minuten zurückkehrst (kürzere Abstecher in eine andere App behalten deine Stelle). Auf der Seite Heute blätterst du mit den Pfeilen neben dem Datum zu früheren oder späteren Tagen. Neue Einträge landen an dem Tag, den du gerade ansiehst.
 4. **Monatsrückblick**: öffnet sich nach Monatsende von selbst. Korrigiere dort Anteile und deine Kontosumme.
-5. **Apple Pay automatisch**: Richte einmal die Kurzbefehle-Automation ein (**Einstellungen → Apple-Pay-Automation**, Schritte unten). Dann kommt jede Apple-Pay-Zahlung von selbst in Ledgerline an, zum Bestätigen oder direkt eingetragen.
+5. **Apple Pay automatisch**: Richte einmal die Kurzbefehle-Automation ein (**Einstellungen → Apple-Pay-Automation**, Schritte unten). Dann kommt jede Apple-Pay-Zahlung an einem Kartenterminal (iPhone oder Watch an das Lesegerät gehalten) von selbst in Ledgerline an, zum Bestätigen oder direkt eingetragen. Apple Pay online und in Apps gehört nicht dazu.
 6. **Rückgängig**: Nach dem Löschen oder Importieren erscheint für ein paar Sekunden **Rückgängig**.
 7. **Hilfe**: Jede Box hat neben ihrem Titel ein **?**, das erklärt, was sie zeigt.
 8. **Tour**: **Einstellungen → Backup & Export → Tour starten** (auf dem iPhone **Mehr → Tour starten**) führt in 11 Stationen durch die App, auch dazu, wo du deine Fixkosten einträgst, und zur Apple-Pay-Automation. „Erst mal umsehen“ in der Einrichtung zeigt sie mit Beispieldaten; **Eigenes einrichten** entfernt die Beispieldaten und startet die Einrichtung.
