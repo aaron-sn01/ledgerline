@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-08 · 54. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-08 · 56. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -292,7 +292,7 @@ GitHub Actions runs `fetch_prices.py` every 2 hours on weekdays, and `fetch_comp
 
 1. In the repository folder, run `python3 -m http.server 8765` and open http://localhost:8765/.
 2. **Settings → Backup & export → Preview with demo data** fills ten months of entries so every chart has content.
-3. Check every page at desktop width and at phone width (390 px), in light and dark mode. Check that no page scrolls sideways and that no date shows month/day.
+3. Check every page at desktop width and at phone widths (390 px and 320 px), in light and dark mode. Check that no page scrolls sideways, that no date shows month/day, and that no word is split in the middle (text may only wrap between words or at a hyphen; only codes and addresses may break anywhere).
 4. Check that the money-flow diagram balances: everything into "Money in" equals everything out of it.
 5. Check that an existing backup still loads (migration).
 
