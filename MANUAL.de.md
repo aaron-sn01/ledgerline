@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-07 · 50. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-07 · 51. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -167,6 +167,7 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 - **Kategorien**: **Einstellungen → Kategorien**: hinzufügen, umbenennen, umfärben, löschen; das Betragsfeld ist ein optionales Monatslimit.
 - **Sprache, Währung, Zahlenformat**: **Einstellungen → Budget**.
 - **Einstellungen finden**: Suchfeld oder Gruppentasten (Plan, Geld, Investments, Geräte, Erweitert).
+- **Monatsausblick**: „Voraussichtlich in die Ersparnisse“ und die erwartete Sparquote gehen für den Rest des Monats von deinen üblichen Alltagsausgaben aus. Einmalige große Käufe (mindestens 100 € und mindestens fünfmal so viel wie dein üblicher Kauf, etwa eine Jahreskarte) zählen einmal, werden aber nicht auf die restlichen Tage fortgeschrieben. „Investiert“ zeigt, was bisher investiert wurde; noch anstehende Pläne stehen darunter.
 - **Wohin das Geld floss / Vermögen im Zeitverlauf**: Zeitraum 1M, 3M, 6M, 1J oder Alle. Die Zusammenfassung zählt erst ab Beginn deiner Aufzeichnung; davor (gestrichelte Linie) ist es eine Schätzung aus deinen heutigen Positionen zu früheren Kursen.
 - **Boxen**: Auf den Titel tippen klappt eine Box ein; **Boxen anordnen** unten auf jeder Seite verschiebt sie. Beides wird pro Gerät gespeichert.
 

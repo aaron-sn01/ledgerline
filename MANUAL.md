@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-07 · 50. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-07 · 51. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -170,6 +170,7 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 - **Savings-rate goal**: **Settings → Savings-rate goal**. Add a goal change from a given month (for example 20% from 03/2027). The switch below it decides whether the cash part of the goal is set aside before your spending budget.
 - **Spending categories**: **Settings → Categories**. Add, rename, recolor or delete them. The amount box next to each is an optional monthly limit; leave it empty for none.
 - **Fixed-cost groups** (Housing, Insurance and so on): **Settings → Fixed-cost groups**.
+- **Month outlook**: "Likely to savings" and the projected savings rate assume your usual day-to-day spending for the rest of the month. One-off big purchases (at least €100 and at least five times your usual purchase, like a yearly ticket) are counted once but not projected onto the remaining days. "Invested" shows what's been invested so far, with the plans still to come listed below it.
 - **Wealth over time**: choose 1M, 3M, 6M, 1Y or All. The summary above the chart counts only from the day you started tracking. Anything earlier (the dashed line) is an estimate made from your current holdings at past prices, so it shows how the market moved, not how much you actually had.
 - **Language**: English or German, under **Settings → Budget → Language** (also offered on the wizard's first screen). German shows dates as 06.10.2026, decimals with a comma, and can switch numbers to 1.234,56 €. Default names (categories, asset classes, fixed-cost groups) switch language too; names you chose yourself stay as they are. The Manual page shows the German version.
 - **Finding a setting**: use the search box or the group buttons (Plan, Money, Investments, Devices, Advanced) at the top of Settings.
