@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-07 · 51. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-08 · 54. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -166,7 +166,8 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 
 ## 6. Changing your plan and settings
 
-- **Income, fixed costs, annual costs, investment plans**: **Settings → Recurring plan**. Set the real deduction day of each item; the cash outlook and the budget use it. To change one month only, use **Month → Edit this month's plan**.
+- **Income, fixed costs, annual costs, investment plans**: **Settings → Recurring plan**. A change there applies straight away to the current month and every month after it that's already prepared, item by item; whatever you changed for one month only (Month → Edit this month's plan) stays as it is. Past months never change. Set the real deduction day of each item; the cash outlook and the budget use it. To change one month only, use **Month → Edit this month's plan**.
+- **Income paid in advance** (for example a stipend paid on the 29th for the following month): enter the real payment day and tick **Paid in advance**. It counts for the month it's meant for, Ledgerline expects it on that day of the month before, and from the moment it arrives it's kept aside for next month instead of being counted as savings. Imports recognise such a payment as next month's planned income. If the timing changes later, change the item and apply it from that month onward.
 - **Savings-rate goal**: **Settings → Savings-rate goal**. Add a goal change from a given month (for example 20% from 03/2027). The switch below it decides whether the cash part of the goal is set aside before your spending budget.
 - **Spending categories**: **Settings → Categories**. Add, rename, recolor or delete them. The amount box next to each is an optional monthly limit; leave it empty for none.
 - **Fixed-cost groups** (Housing, Insurance and so on): **Settings → Fixed-cost groups**.

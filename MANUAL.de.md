@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-07 · 51. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-08 · 54. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -162,7 +162,8 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 
 ## 6. Plan und Einstellungen ändern
 
-- **Einkommen, Fixkosten, jährliche Kosten, Sparpläne**: **Einstellungen → Dauerplan**, jeweils mit dem echten Abbuchungstag. Nur einen Monat ändern: **Monat → Plan dieses Monats bearbeiten**.
+- **Einkommen, Fixkosten, jährliche Kosten, Sparpläne**: **Einstellungen → Dauerplan**, jeweils mit dem echten Abbuchungstag. Nur einen Monat ändern: **Monat → Plan dieses Monats bearbeiten**. Eine Änderung dort gilt sofort für den laufenden und alle schon angelegten Folgemonate, Eintrag für Eintrag; was du nur für einen Monat geändert hast (Monat → Plan dieses Monats bearbeiten), bleibt. Vergangene Monate ändern sich nie.
+- **Im Voraus gezahltes Einkommen** (etwa ein Stipendium, das am 29. für den Folgemonat gezahlt wird): echten Zahltag eintragen und **Im Voraus gezahlt** anhaken. Es zählt für den Monat, für den es gedacht ist; Ledgerline erwartet es an diesem Tag im Vormonat und legt es ab dem Eingang für den nächsten Monat zurück, statt es als Ersparnis zu zählen. Importe erkennen eine solche Zahlung als geplantes Einkommen des nächsten Monats. Ändert sich der Zeitpunkt später, ändere den Eintrag und übernimm ihn ab diesem Monat.
 - **Sparquoten-Ziel**: **Einstellungen → Sparquoten-Ziel**, optional mit Änderung ab einem Monat. Der Schalter darunter legt den Bargeld-Anteil des Ziels vor deinem Ausgabebudget zurück.
 - **Kategorien**: **Einstellungen → Kategorien**: hinzufügen, umbenennen, umfärben, löschen; das Betragsfeld ist ein optionales Monatslimit.
 - **Sprache, Währung, Zahlenformat**: **Einstellungen → Budget**.
