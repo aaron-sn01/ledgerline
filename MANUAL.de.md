@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-08 · 66. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-08 · 72. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -176,7 +176,9 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 - **Kategorien**: **Einstellungen → Kategorien**: hinzufügen, umbenennen, umfärben, löschen; das Betragsfeld ist ein optionales Monatslimit.
 - **Sprache, Währung, Zahlenformat**: **Einstellungen → Budget**.
 - **Einstellungen finden**: Suchfeld oder Gruppentasten (Plan, Geld, Investments, Geräte, Erweitert).
-- **Monatsausblick**: „Voraussichtlich in die Ersparnisse“ und die erwartete Sparquote gehen für den Rest des Monats von deinen üblichen Alltagsausgaben aus. Einmalige große Käufe (mindestens 100 € und mindestens fünfmal so viel wie dein üblicher Kauf, etwa eine Jahreskarte) zählen einmal, werden aber nicht auf die restlichen Tage fortgeschrieben. „Investiert“ zeigt, was bisher investiert wurde; noch anstehende Pläne stehen darunter.
+- **50/30/20** (Seite Monat), nach der Faustregel: alle Ausgaben des Monats, auch Fixkosten, nach **Bedarf** (Ziel 50 % des Einkommens) und **Wünschen**; was vom Einkommen nicht ausgegeben wird, zählt als **gespart** (Sparpläne, Ersparnisse, Tilgung). Das Sparziel ist **dein Sparquoten-Ziel** aus den Einstellungen, Wünsche bekommen den Rest; bei 15 % Ziel steht in der Box also **50/35/15**, und sie folgt jeder Änderung des Ziels. Fixkosten zählen nach ihrer Gruppe, ein Abo ist also ein Wunsch, obwohl es fix ist; Alltagsausgaben nach Kategorie, im laufenden Monat inklusive dessen, was noch zu erwarten ist. Die Box zeigt auch die **Wohnkosten als Anteil am Einkommen** (Faustregel: bis 30 %). Unter **Was zählt als Bedarf?** stellst du jede Fixkosten-Gruppe und Kategorie auf Bedarf oder Wunsch.
+- **Fixkosten nach Gruppe**: Wie das Geldfluss-Diagramm teilen die Monatsbalken (Seite Jahr) die Fixkosten nach Gruppe auf (Wohnen, Versicherungen, Abos …), und **Nach Kategorie** (Monat) und **Kategorien dieses Jahr** (Jahr) enthalten sie nach Gruppe, markiert mit „fix“, jeweils mit Anteil an allen Ausgaben. Entferne dort das Häkchen bei **Mit Fixkosten**, um nur Alltagsausgaben zu sehen. Das Tagesbudget selbst behandelt Fixkosten weiter als einen Block, weil es wissen muss, was schon festgelegt ist.
+- **Monatsausblick**: „Noch zu erwartende Alltagsausgaben“ ist eine Prognose für die restlichen Tage (etwa 29 € pro Tag × 23 verbleibende Tage), nicht das bisher Ausgegebene. „Voraussichtlich in die Ersparnisse“ und die erwartete Sparquote bauen darauf auf. Einmalige große Käufe (mindestens 100 € und mindestens fünfmal so viel wie dein üblicher Kauf, etwa eine Jahreskarte) zählen einmal, werden aber nicht auf die restlichen Tage fortgeschrieben. „Investiert“ zeigt, was bisher investiert wurde; noch anstehende Pläne stehen darunter.
 - **Wohin das Geld floss / Vermögen im Zeitverlauf**: Zeitraum 1M, 3M, 6M, 1J oder Alle. Die Zusammenfassung zählt erst ab Beginn deiner Aufzeichnung; davor (gestrichelte Linie) ist es eine Schätzung aus deinen heutigen Positionen zu früheren Kursen.
 - **Boxen**: Auf den Titel tippen klappt eine Box ein; **Boxen anordnen** unten auf jeder Seite verschiebt sie. Beides wird pro Gerät gespeichert.
 
@@ -300,7 +302,7 @@ GitHub Actions runs `fetch_prices.py` every 2 hours on weekdays, and `fetch_comp
 
 1. In the repository folder, run `python3 -m http.server 8765` and open http://localhost:8765/.
 2. **Settings → Backup & export → Preview with demo data** fills ten months of entries so every chart has content.
-3. Check every page at desktop width and at phone widths (390 px and 320 px), in light and dark mode. Check that no page scrolls sideways, that no date shows month/day, that no word is split in the middle, and that every new or changed text exists in both languages (German mode shows no English, English mode no German) (text may only wrap between words or at a hyphen; only codes and addresses may break anywhere).
+3. Check every page and dialog at desktop width and on all current iPhone sizes, from iPhone SE (320 px) via iPhone 15/16/17 and Pro (393–402 px) to Plus and Pro Max (430–440 px) (`tests/phones_t.py`), and on iPad and Surface sizes in portrait and landscape (`tests/tablets_t.py`), in light and dark mode. Check that no page scrolls sideways, that no date shows month/day, that long words are only hyphenated at a syllable (with a dash, never cut, no tiny fonts to force a fit), and that every new or changed text exists in both languages (German mode shows no English, English mode no German) (text may only wrap between words or at a hyphen; only codes and addresses may break anywhere).
 4. Check that the money-flow diagram balances: everything into "Money in" equals everything out of it.
 5. Check that an existing backup still loads (migration).
 
