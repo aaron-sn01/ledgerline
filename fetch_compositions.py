@@ -1,3 +1,4 @@
+import math
 """Ledgerline composition updater.
 
 Once a month, downloads the full holdings list each fund provider publishes,
@@ -32,7 +33,10 @@ SKIP = ("cash", "derivative", "futures", "fx", "money market")
 
 
 def norm(weights):
+    weights = {k: v for k, v in weights.items() if not math.isnan(v)}
     total = sum(weights.values())
+    if not weights:
+        raise ValueError("no weights found in the download")
     if not 80 <= total <= 120 and not 0.8 <= total <= 1.2:
         raise ValueError(f"weights add up to {total:.1f}, which looks wrong")
     return {k: round(v * 100 / total, 2) for k, v in sorted(weights.items(), key=lambda kv: -kv[1]) if v > 0}
@@ -48,7 +52,9 @@ def ishares(src):
            f"1506575576011.ajax?fileType=csv&fileName={src['ticker']}_holdings&dataType=fund")
     text = fetch(url).decode("utf-8-sig", errors="replace")
     lines = text.splitlines()
-    start = next(i for i, l in enumerate(lines) if "Weight (%)" in l and "Location" in l)
+    start = next((i for i, l in enumerate(lines) if "Weight (%)" in l and "Location" in l), None)
+    if start is None:
+        raise ValueError("no holdings table in the download (the provider may have changed or blocked the file)")
     rows = csv.DictReader(io.StringIO("\n".join(lines[start:])))
     sectors, countries = {}, {}
     for row in rows:
@@ -59,7 +65,12 @@ def ishares(src):
         sector = (row.get("Sector") or "Other").strip()
         if any(s in sector.lower() for s in SKIP):
             continue
-        w = float(row["Weight (%)"].replace(",", ""))
+        try:
+            w = float(row["Weight (%)"].replace(",", ""))
+        except ValueError:
+            continue
+        if math.isnan(w):
+            continue
         loc = (row.get("Location") or "Other").strip()
         sectors[SECTOR.get(sector, sector)] = sectors.get(SECTOR.get(sector, sector), 0) + w
         countries[COUNTRY.get(loc, loc)] = countries.get(COUNTRY.get(loc, loc), 0) + w
@@ -81,6 +92,8 @@ def dws(isin):
         try:
             w = float(str(r[wcol]).replace("%", "").replace(",", ""))
         except ValueError:
+            continue
+        if math.isnan(w):
             continue
         if tcol and "equit" not in str(r[tcol]).lower() and "share" not in str(r[tcol]).lower():
             continue
@@ -113,7 +126,7 @@ for t in json.loads((ROOT / "tickers.json").read_text())["tickers"]:
             continue
         funds[isin] = {"asOf": today, "source": src["provider"], "sectors": sectors, "countries": countries}
     except Exception as exc:  # keep last month's numbers if a provider changes its file
-        errors.append(f"{t['symbol']}: {exc}")
+        errors.append(f"{t['symbol']}: {exc or type(exc).__name__}")
 
 out = {"updated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "funds": funds, "errors": errors}
 (ROOT / "compositions.json").write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")))
