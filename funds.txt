@@ -1,0 +1,4 @@
+# Ledgerline price list
+# One fund per line: its ISIN, then optionally a name. Ledgerline finds the price by itself.
+# Lines starting with # are ignored. Example:
+# IE00BK5BQT80 Vanguard FTSE All-World

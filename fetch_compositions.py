@@ -48,6 +48,25 @@ def fetch(url):
         return r.read()
 
 
+def all_funds():
+    """The funds to fetch: tickers.json plus the simple list in funds.txt (one ISIN per line, optional name)."""
+    out = list(json.loads((ROOT / "tickers.json").read_text())["tickers"])
+    known = {t.get("isin") for t in out}
+    try:
+        for line in (ROOT / "funds.txt").read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            isin, _, name = line.partition(" ")
+            isin = isin.strip().upper()
+            if len(isin) == 12 and isin not in known:
+                out.append({"isin": isin, "name": name.strip() or isin})
+                known.add(isin)
+    except FileNotFoundError:
+        pass
+    return out
+
+
 # iShares blocks automatic downloads from GitHub's servers (it sends a web page instead of the file, seen 08/10/2026).
 # Their funds are updated in the app instead: download the holdings list on the iShares website and import it.
 ISHARES_AUTO = False
@@ -135,10 +154,24 @@ except (FileNotFoundError, json.JSONDecodeError):
 
 funds, errors, manual = dict(previous), [], []
 today = dt.date.today().isoformat()
-for t in json.loads((ROOT / "tickers.json").read_text())["tickers"]:
+try:
+    names = {q.get("isin"): q.get("name") for q in json.loads((ROOT / "prices.json").read_text()).get("quotes", {}).values()}
+except (FileNotFoundError, json.JSONDecodeError):
+    names = {}
+for t in all_funds():
     src, isin = t.get("composition"), t.get("isin")
-    if not src or not isin:
+    if not isin:
         continue
+    if not src:   # a fund from funds.txt: the provider is recognised from its name
+        nm = f"{t.get('name') or ''} {names.get(isin) or ''}"
+        if "xtrackers" in nm.lower():
+            src = {"provider": "dws"}
+        elif "ishares" in nm.lower():
+            q = f"https://www.google.com/search?q={isin}+site%3Aishares.com"
+            manual.append({"isin": isin, "symbol": t.get("symbol") or isin, "name": (t.get("name") if t.get("name") != isin else None) or names.get(isin) or isin, "en": q, "de": q})
+            continue
+        else:
+            continue
     try:
         if src["provider"] == "ishares":
             if not ISHARES_AUTO:
