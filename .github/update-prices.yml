@@ -1,0 +1,34 @@
+name: Update prices
+
+on:
+  schedule:
+    - cron: "23 7-21/2 * * 1-5"   # ETF prices: every two hours, 07:23-21:23 UTC, Monday to Friday
+    - cron: "7 5 2 * *"           # ETF compositions: once a month, on the 2nd
+  workflow_dispatch:                # Run workflow by hand: updates both
+
+permissions:
+  contents: write
+
+concurrency: prices
+
+jobs:
+  update:
+    runs-on: ubuntu-24.04           # fixed version, so GitHub's switch to Ubuntu 26 can't change anything unexpectedly
+    timeout-minutes: 10             # stop a stuck run instead of hanging for 15+ minutes
+    steps:
+      - uses: actions/checkout@v5      # runs on Node.js 24
+      - uses: actions/setup-python@v6  # runs on Node.js 24
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet yfinance pandas openpyxl
+      - run: python fetch_prices.py
+      - name: Fetch ETF compositions
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '7 5 2 * *'
+        run: python fetch_compositions.py
+      - name: Save prices and compositions
+        run: |
+          git config user.name "ledgerline-prices"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add prices.json
+          [ -f compositions.json ] && git add compositions.json
+          if git diff --cached --quiet; then echo "No changes"; else git commit -m "Update prices" && git pull --rebase && git push; fi
