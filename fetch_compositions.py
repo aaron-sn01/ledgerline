@@ -48,6 +48,11 @@ def fetch(url):
         return r.read()
 
 
+# iShares blocks automatic downloads from GitHub's servers (it sends a web page instead of the file, seen 08/10/2026).
+# Their funds are updated in the app instead: download the holdings list on the iShares website and import it.
+ISHARES_AUTO = False
+
+
 def ishares(src):
     """Tries the UK and German iShares sites; says plainly when iShares sends a web page instead of the file."""
     pid, slug, tick = src["productId"], src["slug"], src["ticker"]
@@ -128,7 +133,7 @@ try:
 except (FileNotFoundError, json.JSONDecodeError):
     previous = {}
 
-funds, errors = dict(previous), []
+funds, errors, manual = dict(previous), [], []
 today = dt.date.today().isoformat()
 for t in json.loads((ROOT / "tickers.json").read_text())["tickers"]:
     src, isin = t.get("composition"), t.get("isin")
@@ -136,6 +141,12 @@ for t in json.loads((ROOT / "tickers.json").read_text())["tickers"]:
         continue
     try:
         if src["provider"] == "ishares":
+            if not ISHARES_AUTO:
+                print(f"  {t['symbol']}: iShares, updated in the app by importing its holdings list")
+                manual.append({"isin": isin, "symbol": t["symbol"], "name": t.get("name", t["symbol"]),
+                               "en": f"https://www.ishares.com/uk/individual/en/products/{src['productId']}/{src['slug']}",
+                               "de": f"https://www.ishares.com/de/privatanleger/de/produkte/{src['productId']}/{src['slug']}"})
+                continue
             sectors, countries, url = ishares(src)
         elif src["provider"] == "dws":
             sectors, countries, url = dws(isin)
@@ -145,7 +156,7 @@ for t in json.loads((ROOT / "tickers.json").read_text())["tickers"]:
     except Exception as exc:  # keep last month's numbers if a provider changes its file
         errors.append(f"{t['symbol']}: {exc or type(exc).__name__}")
 
-out = {"updated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "funds": funds, "errors": errors}
+out = {"updated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "funds": funds, "errors": errors, "manual": manual}
 (ROOT / "compositions.json").write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")))
 print(f"{len(funds)} funds in compositions.json")
 for e in errors:
