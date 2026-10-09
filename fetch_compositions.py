@@ -14,7 +14,8 @@ import pathlib
 import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parent
-UA = {"User-Agent": "Mozilla/5.0 (Ledgerline composition updater)"}
+UA = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15",
+      "Accept": "text/csv,application/vnd.ms-excel,text/plain,*/*;q=0.8", "Accept-Language": "en-GB,en;q=0.9,de;q=0.8"}
 
 COUNTRY = {
     "United States of America": "United States", "USA": "United States", "Korea (South)": "South Korea",
@@ -48,33 +49,49 @@ def fetch(url):
 
 
 def ishares(src):
-    url = (f"https://www.ishares.com/uk/individual/en/products/{src['productId']}/{src['slug']}/"
-           f"1506575576011.ajax?fileType=csv&fileName={src['ticker']}_holdings&dataType=fund")
-    text = fetch(url).decode("utf-8-sig", errors="replace")
-    lines = text.splitlines()
-    start = next((i for i, l in enumerate(lines) if "Weight (%)" in l and "Location" in l), None)
-    if start is None:
-        raise ValueError("no holdings table in the download (the provider may have changed or blocked the file)")
-    rows = csv.DictReader(io.StringIO("\n".join(lines[start:])))
-    sectors, countries = {}, {}
-    for row in rows:
-        if not row.get("Name") or row.get("Weight (%)") in (None, "", "-"):
-            continue
-        if (row.get("Asset Class") or "Equity").strip().lower() != "equity":
-            continue
-        sector = (row.get("Sector") or "Other").strip()
-        if any(s in sector.lower() for s in SKIP):
-            continue
+    """Tries the UK and German iShares sites; says plainly when iShares sends a web page instead of the file."""
+    pid, slug, tick = src["productId"], src["slug"], src["ticker"]
+    urls = [f"https://www.ishares.com/uk/individual/en/products/{pid}/{slug}/1506575576011.ajax?fileType=csv&fileName={tick}_holdings&dataType=fund",
+            f"https://www.ishares.com/uk/professional/en/products/{pid}/{slug}/1506575576011.ajax?fileType=csv&fileName={tick}_holdings&dataType=fund",
+            f"https://www.ishares.com/de/privatanleger/de/produkte/{pid}/{slug}/1478358465952.ajax?fileType=csv&fileName={tick}_holdings&dataType=fund"]
+    seen = []
+    for url in urls:
         try:
-            w = float(row["Weight (%)"].replace(",", ""))
-        except ValueError:
-            continue
-        if math.isnan(w):
-            continue
-        loc = (row.get("Location") or "Other").strip()
-        sectors[SECTOR.get(sector, sector)] = sectors.get(SECTOR.get(sector, sector), 0) + w
-        countries[COUNTRY.get(loc, loc)] = countries.get(COUNTRY.get(loc, loc), 0) + w
-    return norm(sectors), norm(countries), url
+            req = urllib.request.Request(url, headers={**UA, "Referer": url.split("/1506575576011")[0].split("/1478358465952")[0]})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                text = r.read().decode("utf-8-sig", errors="replace")
+        except Exception as exc:
+            seen.append(f"{exc.__class__.__name__}: {exc}"); continue
+        if text.lstrip()[:1] == "<":
+            seen.append("got a web page instead of the file (iShares probably blocks automatic downloads)"); continue
+        lines = text.splitlines()
+        start = next((i for i, l in enumerate(lines) if ("Weight (%)" in l or "Gewichtung (%)" in l) and ("Location" in l or "Standort" in l)), None)
+        if start is None:
+            seen.append("no holdings table in the download (the provider may have changed the file)"); continue
+        rows = csv.DictReader(io.StringIO("\n".join(lines[start:])))
+        sectors, countries = {}, {}
+        for row in rows:
+            name, wraw = row.get("Name"), row.get("Weight (%)") or row.get("Gewichtung (%)")
+            if not name or wraw in (None, "", "-"):
+                continue
+            if (row.get("Asset Class") or row.get("Anlageklasse") or "Equity").strip().lower() not in ("equity", "aktien"):
+                continue
+            sector = (row.get("Sector") or row.get("Sektor") or "Other").strip()
+            if any(x in sector.lower() for x in SKIP):
+                continue
+            try:
+                w = float(wraw.replace(",", ".") if "," in wraw and "." not in wraw else wraw.replace(",", ""))
+            except ValueError:
+                continue
+            if math.isnan(w):
+                continue
+            loc = (row.get("Location") or row.get("Standort") or "Other").strip()
+            sectors[SECTOR.get(sector, sector)] = sectors.get(SECTOR.get(sector, sector), 0) + w
+            countries[COUNTRY.get(loc, loc)] = countries.get(COUNTRY.get(loc, loc), 0) + w
+        if sectors:
+            return norm(sectors), norm(countries), url
+        seen.append("the download had no equity rows")
+    raise ValueError(seen[-1] if seen else "no data received")
 
 
 def dws(isin):
