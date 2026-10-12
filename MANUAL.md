@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-10 · 93. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-11 · 95. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -53,7 +53,7 @@ The installed app keeps its **own data**, separate from the same page in a brows
 5. **Apple Pay, automatically**: set up the Shortcuts automation once (**Settings → Apple Pay automation**, steps below) and every Apple Pay payment you make at a card terminal (iPhone or Watch held to the reader) arrives in Ledgerline by itself, either for you to confirm or added straight away. Online and in-app Apple Pay isn't included.
 6. **Undo**: after deleting something or importing, an **Undo** button appears for a few seconds.
 7. **Help**: every box has a **?** next to its title that explains what it shows.
-8. **Tour**: **Settings → Backup & export → Take the tour** (or **More → Take the tour** on iPhone) walks through the app in 11 stops, including where to enter your fixed costs and the Apple Pay automation. "Look around first" in the setup wizard runs it on sample data; **Set up my own** clears the sample data and starts the setup.
+8. **Tour**: **Settings → Backup & export → Take the tour** (or **More → Take the tour** on iPhone) walks through the app in 11 stops, including where to enter your fixed costs and the Apple Pay automation. "Look around first" in the setup wizard runs it on sample data; **Set up my own** clears the sample data and starts the setup. The box being explained is ringed in green, and the menu stays visible with the page you're on ringed too, so you see where to find each thing.
 9. **Setup help for your AI**: on the Manual page and in **Settings → Backup & export**. A text to give ChatGPT, Claude or similar; it guides you through installing, sync and the Apple Pay automation one step at a time, and never asks for your token, passphrase or bank data.
 10. **What's new**: after each update, a short note lists the changes once.
 11. **Back up**: after each monthly review, go to **Settings → Backup & export → Download backup** and keep the file in iCloud Drive or similar.
@@ -199,12 +199,20 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 
 ## 7. Cash and accounts
 
-Ledgerline treats all your accounts as one cash total. A month's budget is kept aside from that total until the month ends; the rest counts as cash savings.
+**Cash** is all your accounts today, minus what this month still needs (what's left to spend plus payments still to come, minus income still to arrive). The money for the rest of the month is in your accounts, but it's already spoken for; everything else is your cash savings. Because the accounts move with every payment, spending more than your budget lowers Cash right away.
 
-- To correct the total: **Wealth → Cash savings → Update balance**. You can list each account separately and the total adds up by itself. When you add your first account, your existing total is kept as a row "My accounts so far", so nothing is lost; split it into separate accounts whenever you like.
-- **Accounts stay current**: money you add to or take from cash savings (interest, spending paid from savings, repayments, sales) is added to the account with the same currency. If you have none in that currency yet, one is created for you (for example "CAD account"), so Each currency shows it as that currency. **Update balance** therefore opens with each account's current balance, and the total, the savings line and **Each currency** always agree. Correct any account there; that becomes its new starting point.
-- **Opening a savings account** changes nothing in how Ledgerline works: add it as another account row in **Update balance**. Moving money between your own accounts is never spending; the importer skips such transfers.
+- **Each account follows its money.** After you save an account's balance, everything that happens in it moves it:
+  - imported entries move the account of the bank they came from (a Trade Republic card payment lowers Trade Republic, a Sparkasse payment the Giro account). Entries from a bank without its own account, and entries you type in, go to the **main account**;
+  - planned income, fixed costs, annual costs and debt payments move the main account on their day; an investment plan moves the account that pays it: choose it under **Update balance → Investment plans are paid from** (for example a plan paid by direct debit from Sparkasse); without a choice it's the account at the broker where that holding's imported entries come from (for example Trade Republic);
+  - spending (also from savings), refunds, income, interest, round-ups, investments, repayments and sales all count; saveback doesn't, because it's Trade Republic's money;
+  - transfers between your own accounts move both: each side moves its account when that bank's screenshot or statement is imported. Importing the same one twice doesn't count it twice.
+- **Main account**: **Wealth → Cash savings → Update balance** lets you pick it (salary, fixed costs and typed-in entries). Without a choice it's your Giro account, else the first one.
+- **Change an entry's account**: open the entry; with two or more accounts it has an **Account** field.
+- **Correct an account**: import a screenshot of its balance (the review shows whether it matches Ledgerline, see Import) or tap **Update balance**. The saved balance becomes that account's new starting point.
+- **Wealth → Cash savings** lists each account's balance today and what this month still needs.
+- **Opening a savings account** changes nothing in how Ledgerline works: add it as another account row in **Update balance**. Moving money between your own accounts is never spending.
 - Interest goes in as **Money in → Cash savings**. The importer does this automatically for interest lines.
+- Without separate accounts (one total only), Cash works as before: the total you entered, kept aside this month's budget, with leftovers and shortfalls joining at month end.
 
 ## Currencies
 

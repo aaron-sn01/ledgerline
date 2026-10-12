@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-10 · 93. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-11 · 95. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -53,7 +53,7 @@ Die installierte App hat ihre **eigenen Daten**, getrennt von derselben Seite in
 5. **Apple Pay automatisch**: Richte einmal die Kurzbefehle-Automation ein (**Einstellungen → Apple-Pay-Automation**, Schritte unten). Dann kommt jede Apple-Pay-Zahlung an einem Kartenterminal (iPhone oder Apple Watch an das Lesegerät gehalten) von selbst in Ledgerline an, zum Bestätigen oder direkt eingetragen. Apple Pay online und in Apps gehört nicht dazu.
 6. **Rückgängig**: Nach dem Löschen oder Importieren erscheint für ein paar Sekunden **Rückgängig**.
 7. **Hilfe**: Jede Box hat neben ihrem Titel ein **?**, das erklärt, was sie zeigt.
-8. **Tour**: **Einstellungen → Backup & Export → Tour starten** (auf dem iPhone **Mehr → Tour starten**) führt in 11 Stationen durch die App, auch dazu, wo du deine Fixkosten einträgst, und zur Apple-Pay-Automation. „Erst mal umsehen“ in der Einrichtung zeigt sie mit Beispieldaten; **Eigenes einrichten** entfernt die Beispieldaten und startet die Einrichtung.
+8. **Tour**: **Einstellungen → Backup & Export → Tour starten** (auf dem iPhone **Mehr → Tour starten**) führt in 11 Stationen durch die App, auch dazu, wo du deine Fixkosten einträgst, und zur Apple-Pay-Automation. „Erst mal umsehen“ in der Einrichtung zeigt sie mit Beispieldaten; **Eigenes einrichten** entfernt die Beispieldaten und startet die Einrichtung. Die erklärte Box ist grün umrandet, und das Menü bleibt sichtbar, mit der Seite, auf der du gerade bist, ebenfalls umrandet, damit du siehst, wo du was findest.
 9. **Einrichtungshilfe für deine KI**: auf der Seite Anleitung und unter **Einstellungen → Backup & Export**. Ein Text für ChatGPT, Claude o. Ä.; er führt dich Schritt für Schritt durch Installation, Sync und Apple-Pay-Automation und fragt nie nach Token, Passphrase oder Bankdaten.
 10. **Neu**: Nach jedem Update zeigt ein kurzer Hinweis einmal die Änderungen.
 11. **Backup**: Nach jedem Monatsrückblick unter **Einstellungen → Backup & Export → Backup herunterladen** sichern und die Datei in iCloud Drive o. Ä. ablegen.
@@ -193,12 +193,20 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 
 ## 7. Bargeld und Konten
 
-Ledgerline behandelt alle Konten als eine Summe. Das Budget des laufenden Monats wird davon zurückgehalten; der Rest zählt als Ersparnisse.
+**Bargeld** ist die Summe all deiner Konten heute, minus das, was dieser Monat noch braucht (was noch zum Ausgeben übrig ist plus noch kommende Zahlungen, minus noch kommende Einnahmen). Das Geld für den Rest des Monats liegt auf deinen Konten, ist aber schon verplant; alles andere sind deine Ersparnisse. Weil die Konten sich mit jeder Zahlung bewegen, senkt Überziehen dein Bargeld sofort.
 
-- Summe korrigieren: **Vermögen → Ersparnisse → Saldo aktualisieren**, optional mit jedem Konto einzeln. Beim ersten Konto bleibt deine bisherige Summe als Zeile „Meine bisherigen Konten“ erhalten, damit nichts verloren geht; teile sie auf, wann immer du willst.
-- **Konten bleiben aktuell**: Geld, das du den Ersparnissen hinzufügst oder entnimmst (Zinsen, aus Ersparnissen Bezahltes, Tilgungen, Verkäufe), wird dem Konto mit derselben Währung zugerechnet. Gibt es noch keins in dieser Währung, wird eins angelegt (etwa „CAD-Konto“), damit „Je Währung“ es in dieser Währung zeigt. **Saldo aktualisieren** öffnet sich deshalb mit dem aktuellen Stand jedes Kontos, und Summe, Ersparnisse und **Je Währung** stimmen immer überein. Korrigiere dort ein Konto, dann ist das sein neuer Ausgangspunkt.
-- **Neues Sparkonto**: einfach als weitere Zeile hinzufügen. Überweisungen zwischen eigenen Konten sind nie Ausgaben; der Import überspringt sie.
-- Zinsen kommen als **Einnahme → Ersparnisse** hinein; der Import erledigt das bei Zinszeilen automatisch.
+- **Jedes Konto folgt seinem Geld.** Nachdem du den Stand eines Kontos gespeichert hast, bewegt es alles, was darauf passiert:
+  - importierte Einträge bewegen das Konto der Bank, von der sie kommen (eine Trade-Republic-Kartenzahlung senkt Trade Republic, eine Sparkasse-Zahlung das Girokonto). Einträge einer Bank ohne eigenes Konto und von Hand eingetragene gehen aufs **Hauptkonto**;
+  - geplante Einnahmen, Fixkosten, jährliche Kosten und Schuldenraten bewegen das Hauptkonto an ihrem Tag; ein Sparplan bewegt das Konto, das ihn bezahlt: Wähle es unter **Saldo aktualisieren → Sparpläne werden bezahlt von** (zum Beispiel ein Sparplan per Lastschrift von der Sparkasse); ohne Auswahl ist es das Konto beim Broker, von dem die importierten Einträge dieser Position kommen (zum Beispiel Trade Republic);
+  - Ausgaben (auch aus Ersparnissen), Erstattungen, Einnahmen, Zinsen, Aufrundungen, Investitionen, Rückzahlungen und Verkäufe zählen; Saveback nicht, denn das ist Geld von Trade Republic;
+  - Überträge zwischen deinen eigenen Konten bewegen beide: Jede Seite bewegt ihr Konto, wenn der Screenshot oder Auszug dieser Bank importiert wird. Denselben zweimal zu importieren zählt ihn nicht doppelt.
+- **Hauptkonto**: Unter **Vermögen → Ersparnisse → Saldo aktualisieren** wählst du es aus (Gehalt, Fixkosten und von Hand eingetragene Einträge). Ohne Auswahl ist es dein Girokonto, sonst das erste.
+- **Konto eines Eintrags ändern**: Öffne den Eintrag; ab zwei Konten hat er ein Feld **Konto**.
+- **Konto korrigieren**: Importiere einen Screenshot seines Stands (die Prüfung zeigt, ob er zu Ledgerline passt, siehe Import) oder tippe auf **Saldo aktualisieren**. Der gespeicherte Stand wird der neue Ausgangspunkt dieses Kontos.
+- **Vermögen → Ersparnisse** zeigt den heutigen Stand jedes Kontos und was dieser Monat noch braucht.
+- **Ein Sparkonto eröffnen** ändert nichts an der Funktionsweise: Füge es in **Saldo aktualisieren** als weitere Kontozeile hinzu. Geld zwischen eigenen Konten zu verschieben ist nie eine Ausgabe.
+- Zinsen kommen als **Einnahme → Ersparnisse** dazu. Der Import macht das bei Zinszeilen automatisch.
+- Ohne einzelne Konten (nur eine Summe) funktioniert Bargeld wie bisher: die eingegebene Summe, abzüglich des Budgets dieses Monats, Reste und Fehlbeträge kommen am Monatsende dazu.
 
 ## Währungen
 
