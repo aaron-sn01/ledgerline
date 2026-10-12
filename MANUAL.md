@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-11 · 95. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-12 · 96. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -266,6 +266,7 @@ Sync keeps your devices in step through an encrypted file in **your own free Git
 
 - **Prices look old**: see section 4. A red **Update prices** run in Actions shows the reason when you open it; the next run usually fixes itself.
 - **App didn't update after uploading**: check the file is named exactly `index.html`, wait for the green tick on **pages build and deployment**, then reload. If deployments stay "Queued", check githubstatus.com; GitHub may be having problems.
+- **Connect doesn't work on the phone**: the reason now appears in red above the fields, and what you typed stays. "Sync file not found": the Sync ID is wrong, or the token belongs to a different GitHub account than the one that created the sync file (each person needs their own account, and all their devices use that same token). "Wrong passphrase": use exactly the passphrase from the first device. Copying the Sync ID with **Copy** on the first device and pasting it avoids typing mistakes.
 - **"Sync problem, see Settings"**: open **Settings → Sync between devices** for the exact reason. "Slow down" means GitHub's rate limit, which clears on its own. "Refused access" means the token is missing the gist permission.
 - **Something looks wrong after an import**: open the entry from the Month page and edit or delete it.
 - **Apple Pay payments don't arrive**: see the end of section 2.

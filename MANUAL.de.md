@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-11 · 95. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-12 · 96. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -260,6 +260,7 @@ Sync hält deine Geräte über eine verschlüsselte Datei in **deinem eigenen ko
 
 - **Kurse wirken alt**: siehe Abschnitt 4. Ein roter Lauf von **Update prices** unter Actions zeigt den Grund; meist behebt sich das beim nächsten Lauf.
 - **App nach dem Hochladen nicht aktualisiert**: Prüfen, ob die Datei genau `index.html` heißt, auf den grünen Haken bei **pages build and deployment** warten, dann neu laden. Bleiben Bereitstellungen auf „Queued“, githubstatus.com prüfen.
+- **Verbinden klappt auf dem Handy nicht**: Der Grund steht jetzt rot über den Feldern, und das Eingetippte bleibt. „Sync-Datei nicht gefunden“: Die Sync-ID stimmt nicht, oder der Token gehört zu einem anderen GitHub-Konto als dem, das die Sync-Datei erstellt hat (jede Person braucht ihr eigenes Konto, und alle ihre Geräte nutzen denselben Token). „Falsche Passphrase“: Nimm genau die Passphrase vom ersten Gerät. Die Sync-ID auf dem ersten Gerät mit **Kopieren** kopieren und einfügen vermeidet Tippfehler.
 - **„Sync-Problem, siehe Einstellungen“**: **Einstellungen → Sync zwischen Geräten** nennt den genauen Grund. „Slow down“ ist GitHubs Limit und verschwindet von selbst; „Refused access“ heißt, dem Token fehlt die gist-Berechtigung.
 - **Apple-Pay-Zahlungen kommen nicht an**: siehe Abschnitt 2.
 - **Nach einem Import stimmt etwas nicht**: den Eintrag auf der Seite Monat öffnen und bearbeiten oder löschen.
