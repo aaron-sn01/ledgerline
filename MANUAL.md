@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-12 · 98. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-12 · 103. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -14,7 +14,8 @@ Your GitHub repository (`aaron-sn01/ledgerline`) contains:
 - `MANUAL.md`: this manual.
 - `fetch_prices.py`: downloads ETF prices from Yahoo Finance.
 - `fetch_compositions.py`: downloads what each ETF holds (sectors and countries), once a month.
-- `tickers.json`: the list of ETFs the updater fetches.
+- `tickers.json`: the list of ETFs the updater fetches, with their symbols.
+- `funds.txt`: the simple list: one ISIN per line; the updater finds the symbol. The easiest place to add a fund.
 - `.github/workflows/update-prices.yml`: tells GitHub when to run the two scripts.
 - `prices.json` and `compositions.json`: written by the updater. Never edit these by hand.
 
@@ -48,7 +49,7 @@ The installed app keeps its **own data**, separate from the same page in a brows
    - **Duplicates**: an entry that's already in Ledgerline, or that appears in two of the files you import, is unticked with a note saying which entry it matches. Repeated purchases (several €3.00 tickets) are counted separately: each entry can only match one other, payments in the same file never count as duplicates, and different times of day (Apple Pay) mean different payments. Overlapping screenshots of the same app can be imported together: a payment that shows up on two or three of them is added once (on screenshots of the same app it needs the same day; a statement may book it a day or two later). If something is unticked wrongly, tick it.
    - **PayPal screenshots**: the **Activity** list in the PayPal app. Payments and money sent to people count as spending, money received as money in (if a friend is paying back their share, choose **Refund** and the category). Transfers to or from your bank are your own transfers and are skipped, cancelled payments too. A refund and its payment cancel out. Amounts in pounds or dollars are converted at that day's rate. Paid by PayPal from your bank account? The same payment may also appear on your bank statement; Ledgerline recognises it there when the shop's name is shown, otherwise untick one of the two.
    - **Paste instead of saving**: take a screenshot, tap its thumbnail, then **Done → Copy and Delete**. In Ledgerline tap **Import → Paste screenshot** (on a Mac: **Paste screenshot or PDF**) (if the iPhone asks, tap **Allow Paste**). If the button doesn't work, tap the dashed box next to it and choose **Paste**. On a Mac, ⌘V works while the Import window is open. PDFs: on a Mac, copy the PDF in Finder and press ⌘V in the import window. On iPhone and iPad, Safari doesn't pass PDFs to web pages, so a PDF can't be pasted there: share it with **Send to Ledgerline** (see Share instead of pasting) or tap **Choose files** (a PDF you just saved is at the top under Recents). If you tap Paste with a PDF copied, Ledgerline offers **Choose the PDF** right away.
-   - **Share instead of pasting**: set up the shortcut **Send to Ledgerline** once (**Settings → Apple Pay automation → Share to Ledgerline**; there's a ready prompt for the AI in Shortcuts on iOS 27, or steps by hand). Then tap **Share** on a screenshot or PDF in any app and choose **Send to Ledgerline**. The next time you open Ledgerline, the import opens by itself and reads the file as if you'd chosen it. It works for several files at once, for PDFs on iPhone too, and on the Mac. The file waits unencrypted in your private sync Gist until Ledgerline opens, then it's deleted from GitHub. It needs sync on the device that shares.
+   - **Share instead of pasting**: set up the shortcut **Send to Ledgerline** once (**Settings → Apple Pay automation → Share to Ledgerline**; step by step in the **Shortcuts** tab, not Automation, from iOS 17; on iOS 27 there's also a ready prompt for the AI in Shortcuts). Then tap **Share** on a screenshot or PDF in any app and choose **Send to Ledgerline**. The next time you open Ledgerline, the import opens by itself and reads the file as if you'd chosen it. It works for several files in one share, for PDFs on iPhone too, and on the Mac. Share again only after Ledgerline has picked up the last share (opening Ledgerline is enough), otherwise the newer share replaces it. The file waits unencrypted in your private sync Gist until Ledgerline opens, then it's deleted from GitHub. It needs sync on the device that shares.
 3. **Browse days**: the app always opens on the Overview, also when you come back to it after more than 10 minutes (shorter trips to another app keep your place). On Today, use the arrows next to the date to see earlier or later days. New entries go on the day you're looking at.
 4. **Monthly review**: opens by itself after a month ends. Correct share counts and your cash total there.
 5. **Apple Pay, automatically**: set up the Shortcuts automation once (**Settings → Apple Pay automation**, steps below) and every Apple Pay payment you make at a card terminal (iPhone or Watch held to the reader) arrives in Ledgerline by itself, either for you to confirm or added straight away. Online and in-app Apple Pay isn't included.
@@ -102,7 +103,7 @@ Anyone can use Ledgerline through your link (https://aaron-sn01.github.io/ledger
 2. The **setup wizard** opens the first time: name, currency, monthly income, fixed costs, investment plans, cash and savings goal. Every step can be skipped; everything can be changed later in Settings (**Settings → Backup & export → Run the setup again** reopens it).
 3. For sync between their own devices and the Apple Pay automation, they need **their own** free GitHub account and token (sections 9 and 2); nobody can use someone else's. Without GitHub everything else works on one device.
 4. When you upload a new version, they get it automatically the next time they open the app. Their data is upgraded on first launch, like yours.
-5. ETF prices come from your `tickers.json`. If someone holds a fund that isn't listed, add it (section 5) or they enter its price by hand.
+5. ETF prices come from your `tickers.json` and `funds.txt`. If someone holds a fund that isn't listed, add its ISIN to `funds.txt` (section 5) or they enter its price by hand.
 
 ### Banks Ledgerline doesn't know yet
 
@@ -138,26 +139,27 @@ To change any other file (for example `tickers.json`): open the file on GitHub, 
 - **Refresh prices** on the Wealth page checks for a newer price file; it can't make GitHub fetch new prices sooner.
 - To fetch now: **Actions → Update prices → Run workflow**. A run by hand also refreshes the ETF compositions.
 - Ethereum and other crypto prices come live from CoinGecko.
-- If a price shows "—": open **Settings → Price updater**, which lists any fund the last run failed for. Check that fund's Yahoo symbol in `tickers.json`.
+- If a price shows "—": open **Settings → Price updater**, which lists any fund the last run failed for. If it was added in `funds.txt`, the updater found no symbol for its ISIN: add it to `tickers.json` with its exact Yahoo symbol (section 5). If it's in `tickers.json`, check that symbol.
 
 ## 5. Adding a new investment
 
 ### An ETF, stock or bond ETF with automatic prices
 
-1. Find its **Yahoo Finance symbol**. For Xetra listings it usually ends in `.DE` (for example `EUNL.DE`). Search the ISIN on finance.yahoo.com to find it.
-2. In Ledgerline: **Wealth → Add holding**. Choose **ETF or stock**, then enter the name, ISIN, Yahoo symbol, broker and number of shares. Pick the **asset class** (Stocks, Bonds, Real estate, and so on).
-3. On GitHub, edit `tickers.json` and add a line inside the list, separated from the others by a comma:
+1. In Ledgerline: **Wealth → Add holding**. Choose **ETF or stock**, then enter the name, ISIN, broker and number of shares, and pick the **asset class** (Stocks, Bonds, Real estate, and so on). The Yahoo symbol can stay empty.
+2. On GitHub, open `funds.txt` (the window in step 1 links to it), click the **pencil** icon and add a new line with the ISIN and, if you like, a name, without a `#` in front (lines starting with `#` are only explanations):
 
    ```
-   { "symbol": "VAGF.DE", "isin": "IE00BG47KH54", "name": "Vanguard Global Aggregate Bond" }
+   IE00BG47KH54 Vanguard Global Aggregate Bond
    ```
 
-4. Run the workflow by hand (section 4) so the price appears straight away.
+   Then **Commit changes**. The price updater finds the stock-exchange symbol by itself.
+3. Run the workflow by hand (section 4) so the price appears straight away.
+4. Only if the updater can't find the fund (**Settings → Price updater** lists it as failed): add it to `tickers.json` instead, with its exact **Yahoo Finance symbol** (for Xetra usually ending in `.DE`; search the ISIN on finance.yahoo.com), inside the list and separated from the others by a comma: `{ "symbol": "VAGF.DE", "isin": "IE00BG47KH54", "name": "Vanguard Global Aggregate Bond" },`
 5. Optional, for the sector and country charts (stocks only): iShares and Xtrackers funds can get automatic compositions. Copy an existing iShares or Xtrackers entry in `tickers.json` and adjust it. Without this, the fund still counts in Asset types but shows as "Not known" in sectors and countries.
 
 ### Crypto
 
-**Add holding → Crypto**, then enter the CoinGecko id (the word in the CoinGecko web address, for example `bitcoin`). Prices come automatically.
+**Add holding**, choose **Crypto** under **Type** (the window then asks for the coin instead of an ISIN), and type the coin: its short name or full name works (`BTC`, `Bitcoin`, `ETH`, `Solana` …). For a coin Ledgerline doesn't know, type the CoinGecko id (the word in the CoinGecko web address, for example `bitcoin`). Enter how many **units** you hold. Prices come automatically; nothing needs adding on GitHub.
 
 ### Anything without an automatic price (private equity, a pension, a property share)
 
@@ -178,9 +180,11 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 - **Share counts from savings plans**: Ledgerline estimates each plan purchase as plan amount ÷ that day's price. When an import shows the shares actually bought (Scalable transaction lists, broker statements), that exact number replaces the estimate for that month, so the share count in Wealth matches your broker.
 - **Regular payments not in your plan**: after three payments to (or from) the same name, with the same amount and a steady rhythm (every week, every two weeks or every month), the Overview offers to add it to the plan: as a fixed cost or an income, from next month (this month already has the payments as entries). The plan works month by month, so a weekly payment is added as its monthly equivalent (amount × 52 ÷ 12); the single payment is remembered so later imports still recognise it.
 - **Income paid in advance** (for example a stipend paid on the 29th for the following month): enter the real payment day and tick **Paid in advance**. It counts for the month it's meant for, Ledgerline expects it on that day of the month before, and from the moment it arrives it's kept aside for next month instead of being counted as savings. Imports recognise such a payment as next month's planned income. If the timing changes later, change the item and apply it from that month onward.
-- **Savings-rate goal**: **Settings → Savings-rate goal**. Add a goal change from a given month (for example 20% from 03/2027). The switch below it decides whether the cash part of the goal is set aside before your spending budget.
+- **Savings-rate goal**: **Settings → Savings-rate goal**. Add a goal change from a given month (for example 20% from 03/2027). The switch below it decides whether the cash part of the goal is set aside before your spending budget. How much that is shows on the Month page under **Monthly budget**: each step of the calculation has its own box (other money in, round-ups, debt repayment from the budget, **Set aside for your goal**), and the line below explains the goal: its percentage of all money in, minus what investment plans, money moved to savings and repayments already cover. Only the rest is set aside.
 - **Spending categories**: **Settings → Categories**. Add, rename, recolor or delete them. The amount box next to each is an optional monthly limit; leave it empty for none.
 - **Categories** (Settings → Categories) are by **type of spending** and are used for both day-to-day spending and fixed costs: an annual tram pass is *Transport · fixed*, a single ticket *Transport*, Netflix *Media & streaming · fixed*. "Fixed" is a property of an item, not a category. Pick each fixed cost's category in the plan.
+- **Entries by category** (Month page): the chips above the list filter it by category. All your categories are there: those with spending in that month first, the others a little lighter below (for example Travel in a month without a trip).
+- **Where the money goes** (Month page): every euro from its source on the left to where it went on the right; both sides always add up. A refund bigger than its category's spending that month appears on the left as **Refunds**.
 - **50/30/20** (Month page), based on the rule of thumb: all spending of the month, fixed costs included, sorted into **needs** (target 50% of income) and **wants**; whatever of the income isn't spent counts as **saved** (investment plans, cash savings, debt repayment). The saved target is **your savings-rate goal** from Settings, and wants get what remains, so with a 15% goal the box reads **50/35/15** and follows any change of the goal. Fixed costs count by their group, so a subscription is a want even though it's fixed; day-to-day spending counts by category, and for the current month includes what's still expected. The box also shows **housing as a share of income** (rule of thumb: up to 30%). Under **What counts as a need?** set each fixed-cost group and category to Need or Want. On the **Year** page the same box covers the year so far. For the current month it shows **so far** and **projected**; the projection uses your usual spending mix and leaves out one-off big purchases (like an annual pass).
 - **Fixed costs in charts**: the month-by-month bars (Year page) show the year's 7 biggest categories in their own colours plus "Other"; tap or hover over a colour for the category, amount and share of that month. **By category** (Month) and **Categories this year** (Year) include fixed costs (darker part of each bar) with a donut chart; untick **With fixed costs** to see day-to-day spending only.
 - **Ways to save** (Overview) is recalculated from your plan and entries every time: several fixed costs of the same kind (two phone contracts, three streaming services, two gyms), price increases, each streaming or app subscription, yearly costs that renew within 45 days, bank and card fees, the same small purchase 5+ times in 30 days, food delivery, categories well above your usual, and card payments that look recurring. Housing, insurance and donations are never suggested. **Keep** hides a suggestion.

@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-12 · 98. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-12 · 103. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -14,7 +14,8 @@ Das GitHub-Repository der App enthält:
 - `MANUAL.md`: diese Anleitung (auf Englisch; die deutsche Fassung ist in die App eingebaut).
 - `fetch_prices.py`: lädt ETF-Kurse von Yahoo Finance.
 - `fetch_compositions.py`: lädt einmal im Monat, was jeder ETF enthält (Sektoren und Länder).
-- `tickers.json`: die Liste der ETFs, deren Kurse geladen werden.
+- `tickers.json`: die Liste der ETFs, deren Kurse geladen werden, mit ihren Symbolen.
+- `funds.txt`: die einfache Liste: eine ISIN pro Zeile; der Updater findet das Symbol. Hier fügst du einen Fonds am einfachsten hinzu.
 - `.github/workflows/update-prices.yml`: legt fest, wann GitHub die beiden Skripte ausführt.
 - `prices.json` und `compositions.json`: schreibt der Updater. Nie von Hand bearbeiten.
 
@@ -48,7 +49,7 @@ Die installierte App hat ihre **eigenen Daten**, getrennt von derselben Seite in
    - **Doppelte Einträge**: Was schon in Ledgerline ist oder in zwei importierten Dateien vorkommt, wird mit einem Hinweis abgewählt. Wiederholte Käufe (mehrere Fahrscheine zu 3,00 €) zählen einzeln: Jeder Eintrag kann nur zu einem anderen passen, Zahlungen aus derselben Datei gelten nie als doppelt, und unterschiedliche Uhrzeiten (Apple Pay) bedeuten unterschiedliche Zahlungen. Überlappende Screenshots derselben App kannst du zusammen importieren: Eine Zahlung, die auf zwei oder drei davon steht, kommt einmal dazu (bei Screenshots derselben App muss der Tag gleich sein; ein Kontoauszug bucht oft ein, zwei Tage später). Ist etwas zu Unrecht abgewählt, setz das Häkchen.
    - **PayPal-Screenshots**: die Liste **Aktivitäten** in der PayPal-App. Zahlungen und an Personen gesendetes Geld zählen als Ausgaben, erhaltenes Geld als Einnahme (zahlt dir jemand seinen Anteil zurück, wähle **Erstattung** und die Kategorie). Überweisungen auf dein oder von deinem Bankkonto sind eigene Überträge und werden übersprungen, stornierte Zahlungen auch. Eine Erstattung hebt die zugehörige Zahlung auf. Beträge in Pfund oder Dollar werden zum Kurs des Tages umgerechnet. Zahlt PayPal von deinem Bankkonto? Dann kann dieselbe Zahlung auch auf dem Kontoauszug stehen; Ledgerline erkennt sie dort, wenn der Händler genannt ist, sonst nimm bei einer der beiden das Häkchen weg.
    - **Einfügen statt speichern**: Screenshot machen, auf die Vorschau tippen, dann **Fertig → Kopieren und löschen**. In Ledgerline auf **Importieren → Screenshot einfügen** (auf dem Mac: **Screenshot oder PDF einfügen**) tippen (falls das iPhone fragt: **Einfügen erlauben**). Klappt die Taste nicht, tippe in das gestrichelte Feld daneben und wähle **Einfügen**. Auf dem Mac funktioniert ⌘V, solange das Importfenster offen ist. PDFs: Auf dem Mac das PDF im Finder kopieren und im Import-Fenster ⌘V drücken. Auf iPhone und iPad gibt Safari PDFs nicht an Webseiten weiter, dort lässt sich ein PDF also nicht einfügen: Teile es mit **An Ledgerline senden** (siehe Teilen statt einfügen) oder tippe auf **Dateien auswählen** (ein gerade gespeichertes PDF steht oben unter Zuletzt). Tippst du mit einem kopierten PDF auf Einfügen, bietet Ledgerline gleich **PDF auswählen** an.
-   - **Teilen statt einfügen**: Richte einmal den Kurzbefehl **An Ledgerline senden** ein (**Einstellungen → Apple-Pay-Automation → An Ledgerline teilen**; dort gibt es einen fertigen Prompt für die KI in Kurzbefehle unter iOS 27 oder Schritte von Hand). Dann in jeder App bei einem Screenshot oder PDF auf **Teilen** tippen und **An Ledgerline senden** wählen. Beim nächsten Öffnen von Ledgerline öffnet sich der Import von selbst und liest die Datei, als hättest du sie ausgewählt. Das geht für mehrere Dateien auf einmal, auch für PDFs auf dem iPhone und auf dem Mac. Die Datei wartet unverschlüsselt in deinem privaten Sync-Gist, bis Ledgerline öffnet, dann wird sie bei GitHub gelöscht. Auf dem Gerät, das teilt, muss Sync eingerichtet sein.
+   - **Teilen statt einfügen**: Richte einmal den Kurzbefehl **An Ledgerline senden** ein (**Einstellungen → Apple-Pay-Automation → An Ledgerline teilen**; Schritt für Schritt im Tab **Kurzbefehle**, nicht Automation, ab iOS 17; unter iOS 27 gibt es auch einen fertigen Prompt für die KI in Kurzbefehle). Dann in jeder App bei einem Screenshot oder PDF auf **Teilen** tippen und **An Ledgerline senden** wählen. Beim nächsten Öffnen von Ledgerline öffnet sich der Import von selbst und liest die Datei, als hättest du sie ausgewählt. Das geht für mehrere Dateien in einem Teilen-Vorgang, auch für PDFs auf dem iPhone und auf dem Mac. Teile erneut erst, nachdem Ledgerline den letzten Vorgang abgeholt hat (Ledgerline öffnen reicht), sonst ersetzt das neue Teilen ihn. Die Datei wartet unverschlüsselt in deinem privaten Sync-Gist, bis Ledgerline öffnet, dann wird sie bei GitHub gelöscht. Auf dem Gerät, das teilt, muss Sync eingerichtet sein.
 3. **Tage durchblättern**: Die App öffnet immer mit der Übersicht, auch wenn du nach mehr als 10 Minuten zurückkehrst (kürzere Abstecher in eine andere App behalten deine Stelle). Auf der Seite Heute blätterst du mit den Pfeilen neben dem Datum zu früheren oder späteren Tagen. Neue Einträge landen an dem Tag, den du gerade ansiehst.
 4. **Monatsrückblick**: öffnet sich nach Monatsende von selbst. Korrigiere dort Anteile und deine Kontosumme.
 5. **Apple Pay automatisch**: Richte einmal die Kurzbefehle-Automation ein (**Einstellungen → Apple-Pay-Automation**, Schritte unten). Dann kommt jede Apple-Pay-Zahlung an einem Kartenterminal (iPhone oder Apple Watch an das Lesegerät gehalten) von selbst in Ledgerline an, zum Bestätigen oder direkt eingetragen. Apple Pay online und in Apps gehört nicht dazu.
@@ -117,7 +118,7 @@ Jeder kann Ledgerline über denselben Link nutzen. Die Daten bleiben auf den eig
 2. Beim ersten Öffnen startet die **Einrichtung**: Name, Währung, Sprache, Monatseinkommen, Fixkosten, Sparpläne, Bargeld und Sparziel. Jeder Schritt lässt sich überspringen, alles später in den Einstellungen ändern (**Einstellungen → Backup & Export → Einrichtung erneut starten**).
 3. Für Sync zwischen den eigenen Geräten und die Apple-Pay-Automation braucht jede Person ein **eigenes** kostenloses GitHub-Konto und Token (Abschnitte 9 und 2); fremde lassen sich nicht nutzen. Ohne GitHub funktioniert alles andere auf einem Gerät.
 4. Neue Versionen kommen automatisch beim nächsten Öffnen an; die Daten werden beim ersten Start angepasst.
-5. ETF-Kurse kommen aus `tickers.json`. Fehlt ein Fonds, kann er dort ergänzt werden (Abschnitt 5), oder man gibt den Kurs von Hand ein.
+5. ETF-Kurse kommen aus `tickers.json` und `funds.txt`. Fehlt ein Fonds, kann seine ISIN in `funds.txt` ergänzt werden (Abschnitt 5), oder man gibt den Kurs von Hand ein.
 
 ## 3. Die App auf eine neue Version bringen
 
@@ -134,26 +135,27 @@ Deine Daten bleiben erhalten; neue Versionen passen alte Daten beim ersten Start
 - **Kurse aktualisieren** auf der Seite Vermögen prüft auf eine neuere Kursdatei; GitHub lädt dadurch nicht früher neue Kurse.
 - Sofort laden: **Actions → Update prices → Run workflow**. Ein manueller Lauf aktualisiert auch die ETF-Zusammensetzungen.
 - Kryptokurse kommen live von CoinGecko.
-- Zeigt ein Kurs „—“: **Einstellungen → Kurs-Updater** nennt Fonds, bei denen der letzte Lauf fehlschlug. Prüfe dann das Yahoo-Symbol in `tickers.json`.
+- Zeigt ein Kurs „—“: **Einstellungen → Kurs-Updater** nennt Fonds, bei denen der letzte Lauf fehlschlug. Steht er in `funds.txt`, hat der Updater für seine ISIN kein Symbol gefunden: Trag ihn mit seinem genauen Yahoo-Symbol in `tickers.json` ein (Abschnitt 5). Steht er in `tickers.json`, prüfe dort das Symbol.
 
 ## 5. Ein neues Investment hinzufügen
 
 ### ETF, Aktie oder Anleihe-ETF mit automatischen Kursen
 
-1. Das **Yahoo-Finance-Symbol** suchen (bei Xetra meist mit `.DE` am Ende, z. B. `EUNL.DE`; die ISIN auf finance.yahoo.com suchen).
-2. In Ledgerline: **Vermögen → Position hinzufügen**, **ETF oder Aktie** wählen, Name, ISIN, Symbol, Broker, Anteile und **Anlageklasse** eintragen.
-3. Auf GitHub `tickers.json` bearbeiten und eine Zeile in die Liste einfügen, durch Komma getrennt:
+1. In Ledgerline: **Vermögen → Position hinzufügen**, **ETF oder Aktie** wählen, Name, ISIN, Broker, Anteile und **Anlageklasse** eintragen. Das Yahoo-Symbol kann leer bleiben.
+2. Auf GitHub `funds.txt` öffnen (das Fenster aus Schritt 1 verlinkt sie), auf das **Stift**-Symbol klicken und eine neue Zeile mit der ISIN und, wenn du magst, einem Namen einfügen, ohne `#` davor (Zeilen mit `#` sind nur Erklärungen):
 
    ```
-   { "symbol": "VAGF.DE", "isin": "IE00BG47KH54", "name": "Vanguard Global Aggregate Bond" }
+   IE00BG47KH54 Vanguard Global Aggregate Bond
    ```
 
-4. Den Workflow von Hand starten (Abschnitt 4), damit der Kurs sofort erscheint.
+   Dann **Commit changes**. Der Kurs-Updater findet das Börsensymbol selbst.
+3. Den Workflow von Hand starten (Abschnitt 4), damit der Kurs sofort erscheint.
+4. Nur wenn der Updater den Fonds nicht findet (**Einstellungen → Kurs-Updater** zeigt ihn als fehlgeschlagen): Trag ihn stattdessen in `tickers.json` ein, mit seinem genauen **Yahoo-Finance-Symbol** (bei Xetra meist mit `.DE` am Ende; die ISIN auf finance.yahoo.com suchen), in die Liste und durch Komma getrennt: `{ "symbol": "VAGF.DE", "isin": "IE00BG47KH54", "name": "Vanguard Global Aggregate Bond" },`
 5. Optional für die Sektor- und Länderdiagramme (nur Aktien): iShares- und Xtrackers-Fonds bekommen automatische Zusammensetzungen; einen vorhandenen Eintrag in `tickers.json` kopieren und anpassen.
 
 ### Krypto
 
-**Position hinzufügen → Krypto** und die CoinGecko-ID eintragen (das Wort in der CoinGecko-Adresse, z. B. `bitcoin`).
+**Position hinzufügen**, unter **Art** **Krypto** wählen (das Fenster fragt dann nach dem Coin statt nach einer ISIN) und den Coin eintragen: Kürzel oder voller Name gehen (`BTC`, `Bitcoin`, `ETH`, `Solana` …). Für einen Coin, den Ledgerline nicht kennt, die CoinGecko-ID eintragen (das Wort in der CoinGecko-Adresse, z. B. `bitcoin`). Gib an, wie viele **Einheiten** du hast. Die Kurse kommen automatisch; auf GitHub muss nichts ergänzt werden.
 
 ### Alles ohne automatischen Kurs (Private Equity, Rente, Immobilienanteil)
 
@@ -174,10 +176,12 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 - **Anteile aus Sparplänen**: Ledgerline schätzt jeden Sparplan-Kauf als Planbetrag ÷ Kurs des Tages. Zeigt ein Import die tatsächlich gekauften Anteile (Scalable-Umsatzlisten, Broker-Abrechnungen), ersetzt genau diese Zahl die Schätzung für diesen Monat, sodass die Anteile unter Vermögen zu deinem Broker passen.
 - **Regelmäßige Zahlungen, die nicht im Plan sind**: Nach drei Zahlungen an (oder von) demselben Namen, mit gleichem Betrag und festem Rhythmus (jede Woche, alle zwei Wochen oder jeden Monat), bietet die Übersicht an, sie in den Plan aufzunehmen: als Fixkosten oder Einkommen, ab nächstem Monat (dieser Monat hat die Zahlungen schon als Einträge). Der Plan rechnet in Monaten; eine wöchentliche Zahlung wird daher als Monatsbetrag aufgenommen (Betrag × 52 ÷ 12). Die einzelne Zahlung wird gemerkt, damit spätere Importe sie weiter erkennen.
 - **Im Voraus gezahltes Einkommen** (etwa ein Stipendium, das am 29. für den Folgemonat gezahlt wird): echten Zahltag eintragen und **Im Voraus gezahlt** anhaken. Es zählt für den Monat, für den es gedacht ist; Ledgerline erwartet es an diesem Tag im Vormonat und legt es ab dem Eingang für den nächsten Monat zurück, statt es als Ersparnis zu zählen. Importe erkennen eine solche Zahlung als geplantes Einkommen des nächsten Monats. Ändert sich der Zeitpunkt später, ändere den Eintrag und übernimm ihn ab diesem Monat.
-- **Sparquoten-Ziel**: **Einstellungen → Sparquoten-Ziel**, optional mit Änderung ab einem Monat. Der Schalter darunter legt den Bargeld-Anteil des Ziels vor deinem Ausgabebudget zurück.
+- **Sparquoten-Ziel**: **Einstellungen → Sparquoten-Ziel**, optional mit Änderung ab einem Monat. Der Schalter darunter legt den Bargeld-Anteil des Ziels vor deinem Ausgabebudget zurück. Wie viel das ist, zeigt die Seite Monat unter **Monatsbudget**: Jeder Schritt der Rechnung hat sein eigenes Feld (sonstige Einnahmen, Aufrundungen, Tilgung aus dem Budget, **Zurückgelegt für dein Ziel**), und die Zeile darunter erklärt das Ziel: sein Prozentsatz aller Einnahmen, minus das, was Sparpläne, Geld auf dem Sparkonto und Tilgungen schon abdecken. Nur der Rest wird zurückgelegt.
 - **Kategorien**: **Einstellungen → Kategorien**: hinzufügen, umbenennen, umfärben, löschen; das Betragsfeld ist ein optionales Monatslimit.
 - **Sprache, Währung, Zahlenformat**: **Einstellungen → Budget**.
 - **Einstellungen finden**: Suchfeld oder Gruppentasten (Plan, Geld, Investments, Geräte, Erweitert).
+- **Einträge nach Kategorie** (Seite Monat): Die Felder über der Liste filtern sie nach Kategorie. Alle deine Kategorien stehen dort: die mit Ausgaben in diesem Monat zuerst, die anderen etwas heller darunter (zum Beispiel Reisen in einem Monat ohne Reise).
+- **Wohin das Geld fließt** (Seite Monat): jeder Euro von seiner Herkunft links bis zu seinem Ziel rechts; beide Seiten ergeben immer dieselbe Summe. Eine Erstattung, die größer ist als die Ausgaben ihrer Kategorie in diesem Monat, erscheint links als **Erstattungen**.
 - **50/30/20** (Seite Monat), nach der Faustregel: alle Ausgaben des Monats, auch Fixkosten, nach **Bedarf** (Ziel 50 % des Einkommens) und **Wünschen**; was vom Einkommen nicht ausgegeben wird, zählt als **gespart** (Sparpläne, Ersparnisse, Tilgung). Das Sparziel ist **dein Sparquoten-Ziel** aus den Einstellungen, Wünsche bekommen den Rest; bei 15 % Ziel steht in der Box also **50/35/15**, und sie folgt jeder Änderung des Ziels. Fixkosten zählen nach ihrer Gruppe, ein Abo ist also ein Wunsch, obwohl es fix ist; Alltagsausgaben nach Kategorie, im laufenden Monat inklusive dessen, was noch zu erwarten ist. Die Box zeigt auch die **Wohnkosten als Anteil am Einkommen** (Faustregel: bis 30 %). Unter **Was zählt als Bedarf?** stellst du jede Fixkosten-Gruppe und Kategorie auf Bedarf oder Wunsch. Auf der Seite **Jahr** zeigt dieselbe Box das bisherige Jahr. Im laufenden Monat siehst du **bisher** und **erwartet**; die Prognose nutzt deinen üblichen Ausgabenmix und lässt einmalige große Käufe (etwa eine Jahreskarte) weg.
 - **Fixkosten in Diagrammen**: Die Monatsbalken (Seite Jahr) zeigen die 7 größten Kategorien des Jahres in eigenen Farben plus „Sonstiges“; tipp auf eine Farbe oder fahr darüber für Kategorie, Betrag und Anteil am Monat. **Nach Kategorie** (Monat) und **Kategorien dieses Jahr** (Jahr) enthalten die Fixkosten (dunklerer Teil jedes Balkens) mit Ringdiagramm; nimm das Häkchen bei **Mit Fixkosten** weg, um nur Alltagsausgaben zu sehen.
 - **Sparmöglichkeiten** (Übersicht) werden jedes Mal aus Plan und Einträgen neu berechnet: mehrere Fixkosten derselben Art (zwei Handyverträge, drei Streamingdienste, zwei Fitnessstudios), Preiserhöhungen, jedes Streaming- oder App-Abo, Jahreskosten, die sich in den nächsten 45 Tagen verlängern, Bank- und Kartengebühren, derselbe kleine Kauf 5-mal oder öfter in 30 Tagen, Lieferdienste, Kategorien deutlich über deinem Schnitt und Kartenzahlungen, die regelmäßig wirken. Wohnen, Versicherungen und Spenden werden nie vorgeschlagen. **Behalten** blendet einen Vorschlag aus.
