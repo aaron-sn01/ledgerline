@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-13 · 123. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-13 · 124. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -206,10 +206,10 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 
 - **Jedes Konto folgt seinem Geld.** Nachdem du den Stand eines Kontos gespeichert hast, bewegt es alles, was darauf passiert:
   - importierte Einträge bewegen das Konto der Bank, von der sie kommen (eine Trade-Republic-Kartenzahlung senkt Trade Republic, eine Sparkasse-Zahlung das Girokonto). Einträge einer Bank ohne eigenes Konto und von Hand eingetragene gehen aufs **Hauptkonto**;
-  - geplante Einnahmen, Fixkosten, jährliche Kosten und Schuldenraten bewegen das Hauptkonto an ihrem Tag; ein Sparplan bewegt das Konto, das ihn bezahlt: Wähle es unter **Saldo aktualisieren → Sparpläne werden bezahlt von** (zum Beispiel ein Sparplan per Lastschrift von der Sparkasse); ohne Auswahl ist es das Konto beim Broker, von dem die importierten Einträge dieser Position kommen (zum Beispiel Trade Republic);
+  - geplante Einnahmen, Fixkosten, jährliche Kosten und Sparpläne bewegen das Konto, das du ihnen unter **Einstellungen → Dauerplan** zugewiesen hast (unter jeder Zeile: **Geht auf** / **Bezahlt von**), sonst das Hauptkonto; ein Sparplan ohne Auswahl bewegt das Konto beim Broker des Fonds. Schuldenraten bewegen das Hauptkonto.
   - Ausgaben (auch aus Ersparnissen), Erstattungen, Einnahmen, Zinsen, Aufrundungen, Investitionen, Rückzahlungen und Verkäufe zählen; Saveback nicht, denn das ist Geld von Trade Republic;
   - Überträge zwischen deinen eigenen Konten bewegen beide: Jede Seite bewegt ihr Konto, wenn der Screenshot oder Auszug dieser Bank importiert wird. Denselben zweimal zu importieren zählt ihn nicht doppelt.
-- **Hauptkonto**: Unter **Vermögen → Ersparnisse → Saldo aktualisieren** wählst du es aus (Gehalt, Fixkosten und von Hand eingetragene Einträge). Ohne Auswahl ist es dein Girokonto, sonst das erste.
+- **Hauptkonto**: oben in **Einstellungen → Dauerplan** gewählt (erscheint, sobald du zwei oder mehr Konten hast). Es gilt für jede Planzeile ohne eigenes Konto und für Einträge, die du von Hand eingibst. Ohne Auswahl ist es dein Girokonto, sonst das erste. **Plan dieses Monats bearbeiten** hat unter jeder Zeile dieselbe Kontoauswahl, damit ein einzelner Monat abweichen kann.
 - **Konto eines Eintrags ändern**: Öffne den Eintrag; ab zwei Konten hat er ein Feld **Konto**.
 - **Konto korrigieren**: Importiere einen Screenshot seines Stands (die Prüfung zeigt, ob er zu Ledgerline passt, siehe Import) oder tippe auf **Saldo aktualisieren**. Der gespeicherte Stand wird der neue Ausgangspunkt dieses Kontos.
 - **Vermögen → Ersparnisse** zeigt den heutigen Stand jedes Kontos und was dieser Monat noch braucht.

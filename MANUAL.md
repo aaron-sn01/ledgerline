@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-13 · 123. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-13 · 124. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -212,10 +212,10 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 
 - **Each account follows its money.** After you save an account's balance, everything that happens in it moves it:
   - imported entries move the account of the bank they came from (a Trade Republic card payment lowers Trade Republic, a Sparkasse payment the Giro account). Entries from a bank without its own account, and entries you type in, go to the **main account**;
-  - planned income, fixed costs, annual costs and debt payments move the main account on their day; an investment plan moves the account that pays it: choose it under **Update balance → Investment plans are paid from** (for example a plan paid by direct debit from Sparkasse); without a choice it's the account at the broker where that holding's imported entries come from (for example Trade Republic);
+  - planned income, fixed costs, annual costs and investment plans move the account chosen for them in **Settings → Recurring plan** (under each line: **Paid into** / **Paid from**), or the main account if none is chosen; an investment plan without a choice moves the account at the fund's broker. Debt payments move the main account.
   - spending (also from savings), refunds, income, interest, round-ups, investments, repayments and sales all count; saveback doesn't, because it's Trade Republic's money;
   - transfers between your own accounts move both: each side moves its account when that bank's screenshot or statement is imported. Importing the same one twice doesn't count it twice.
-- **Main account**: **Wealth → Cash savings → Update balance** lets you pick it (salary, fixed costs and typed-in entries). Without a choice it's your Giro account, else the first one.
+- **Main account**: chosen at the top of **Settings → Recurring plan** (it appears once you have two or more accounts). It's used for every plan line without its own account and for entries you type in. Without a choice it's your Giro account, else the first one. **Edit this month's plan** has the same account choice under each line, so a single month can differ.
 - **Change an entry's account**: open the entry; with two or more accounts it has an **Account** field.
 - **Correct an account**: import a screenshot of its balance (the review shows whether it matches Ledgerline, see Import) or tap **Update balance**. The saved balance becomes that account's new starting point.
 - **Wealth → Cash savings** lists each account's balance today and what this month still needs.
