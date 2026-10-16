@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-16 · 134. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-16 · 135. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -226,7 +226,7 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 - **Opening a savings account** changes nothing in how Ledgerline works: add it as another account row in **Update balance**. Moving money between your own accounts is never spending.
 - Interest goes in as **Money in → Cash savings**. The importer does this automatically for interest lines.
 - Without separate accounts (one total only), Cash works as before: the total you entered, kept aside this month's budget, with leftovers and shortfalls joining at month end.
-- **Safety net** (Today and Overview): your cash divided by one month of needs (fixed costs, investment plans and day-to-day spending). Day-to-day spending is your typical month, leaving out one-offs; before your first finished month it's this month's projected spending, counted from your first entry (after a week of entries), so changing your income doesn't change the safety net.
+- **Safety net** (the round badge at the top of the Overview; tap it for Wealth): your cash divided by one month of needs (fixed costs, investment plans and day-to-day spending). Day-to-day spending is your typical month, leaving out one-offs; before your first finished month it's this month's projected spending, counted from your first entry (after a week of entries), so changing your income doesn't change the safety net.
 
 ## Currencies
 
