@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-17 · 138. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-19 · 139. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -202,6 +202,7 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 - **Links in der App**: Wo ein Text sagt, wohin es geht („Einstellungen → Dauerplan“, „Vermögen → Ersparnisse“), tippst du darauf und springst direkt zu dieser Box, die kurz hervorgehoben wird. In einem Hilfe-Fenster öffnet „Anleitung“ die passende Stelle dieser Anleitung.
 - **Monatsausblick**: „Noch zu erwartende Alltagsausgaben“ ist eine Prognose für die restlichen Tage (etwa 29 € pro Tag × 23 verbleibende Tage), nicht das bisher Ausgegebene. „Voraussichtlich in die Ersparnisse“ und die erwartete Sparquote bauen darauf auf. Einmalige große Käufe (mindestens 100 € und mindestens fünfmal so viel wie dein üblicher Kauf, etwa eine Jahreskarte) zählen einmal, werden aber nicht auf die restlichen Tage fortgeschrieben. „Investiert“ zeigt, was bisher investiert wurde; noch anstehende Pläne stehen darunter.
 - **Wohin das Geld floss / Vermögen im Zeitverlauf**: Zeitraum 1M, 3M, 6M, 1J oder Alle. Die Zusammenfassung zählt erst ab Beginn deiner Aufzeichnung; davor (gestrichelte Linie) ist es eine Schätzung aus deinen heutigen Positionen zu früheren Kursen.
+- **Wohin das führen kann** (Vermögen): deine Anlagen bis zum Rentenalter hochgerechnet, mit dem mittleren Ergebnis, dem Bereich von 80 % der Ergebnisse und dem, was du eingezahlt hast. Die Skala endet knapp über dem höchsten gezeigten Ergebnis und passt sich an, wenn du Rendite, Monatsbetrag oder eine Entnahme änderst.
 - **Boxen**: Auf den Titel tippen klappt eine Box ein; **Boxen anordnen** unten auf jeder Seite verschiebt sie mit den Pfeilen ↑ ↓; mit Maus oder Trackpad kannst du auch am Griff ⠿ ziehen (auf iPhone und iPad gibt es nur die Pfeile, weil Ziehen in Safari dort nicht zuverlässig klappt). Beides wird pro Gerät gespeichert. **Ausblenden** im selben Modus nimmt eine Box, die du nicht brauchst, von der Seite; gelöscht wird sie nicht: Unter Boxen anordnen erscheinen ausgeblendete Boxen blass, und **Zeigen** holt eine zurück. Dauerplan, Backup & Export, Monatsbudget und Positionen lassen sich nicht ausblenden, und die Tour und die Suche in den Einstellungen zeigen immer alle Boxen. Offene oder zugeklappte Boxen werden auch gespeichert: Eine Box bleibt, wie du sie gelassen hast.
 
 ## 7. Bargeld und Konten

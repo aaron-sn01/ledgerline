@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-10-17 · 138. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-10-19 · 139. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app. It is one web page (`index.html`) hosted on GitHub Pages, plus a small price updater that runs on GitHub. Your entries never leave your devices except as an encrypted sync file in your own GitHub account.
 
@@ -205,6 +205,7 @@ In the holding dialog, choose **Asset class → + New asset class…** and type 
 - **Links inside the app**: wherever a text says where to go ("Settings → Recurring plan", "Wealth → Cash savings"), tap it to jump straight to that box, which is briefly highlighted. In a help popup, "Manual" opens the matching part of this manual.
 - **Month outlook**: "Day-to-day spending still to come" is a forecast for the remaining days (for example about €29 a day × 23 days left), not what you've spent so far. "Likely to savings" and the projected savings rate build on it. One-off big purchases (at least €100 and at least five times your usual purchase, like a yearly ticket) are counted once but not projected onto the remaining days. "Invested" shows what's been invested so far, with the plans still to come listed below it.
 - **Wealth over time**: choose 1M, 3M, 6M, 1Y or All. The summary above the chart counts only from the day you started tracking. Anything earlier (the dashed line) is an estimate made from your current holdings at past prices, so it shows how the market moved, not how much you actually had.
+- **Where this could lead** (Wealth): your investments projected to retirement age, with the middle outcome, the range of 80% of outcomes and what you paid in. The scale ends just above the highest outcome shown, so it adjusts when you change the return, the monthly amount or a withdrawal.
 - **Language**: English or German, with the two buttons **English / Deutsch** at the top of **Settings** (also offered on the wizard's first screen). German shows dates as 06.10.2026, decimals with a comma, and can switch numbers to 1.234,56 €. Default names (categories, asset classes, fixed-cost groups) switch language too; names you chose yourself stay as they are. The Manual page shows the German version.
 - **Finding a setting**: use the search box or the group buttons (Plan, Money, Investments, Devices, Advanced) at the top of Settings.
 - **Settings layout**: Recurring plan spans the full width; the other boxes flow in two columns (one on a phone).
