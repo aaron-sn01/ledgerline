@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-10-20 · 140. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-10-21 · 141. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist eine persönliche Budget- und Vermögens-App. Sie besteht aus einer einzigen Webseite (`index.html`) auf GitHub Pages und einem kleinen Kurs-Updater, der auf GitHub läuft. Deine Einträge verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto.
 
@@ -224,6 +224,7 @@ Im Positionsdialog **Anlageklasse → + Neue Anlageklasse …** wählen und eine
 - **Ein Sparkonto eröffnen** ändert nichts an der Funktionsweise: Füge es in **Saldo aktualisieren** als weitere Kontozeile hinzu. Geld zwischen eigenen Konten zu verschieben ist nie eine Ausgabe.
 - Zinsen kommen als **Einnahme → Ersparnisse** dazu. Der Import macht das bei Zinszeilen automatisch.
 - Ohne einzelne Konten (nur eine Summe) funktioniert Bargeld wie bisher: die eingegebene Summe, abzüglich des Budgets dieses Monats, Reste und Fehlbeträge kommen am Monatsende dazu.
+- **Vermögensänderung** (Übersicht → Karte Nettovermögen, Zeile „… seit“): Tippe auf die Karte für die Aufteilung seit dem letzten Tag des Vormonats: Bargeld, in Anlagen eingezahltes Geld, Kursentwicklung und getilgte Schulden, das Nettovermögen an beiden Tagen, die größten Einträge im Bargeld-Teil und wie sich jede Anlage verändert hat. Eine Investition ohne gewählten Fonds zählt als schon in deinen bestätigten Anteilen enthalten, wenn sie älter ist als diese.
 - **Notgroschen** (das runde Abzeichen oben in der Übersicht; antippen öffnet Vermögen): dein Bargeld geteilt durch einen Monat an Bedarf (Fixkosten, Sparpläne und Alltagsausgaben). Die Alltagsausgaben sind dein üblicher Monat ohne Einmaliges; vor deinem ersten abgeschlossenen Monat sind es die erwarteten Ausgaben dieses Monats, gerechnet ab deinem ersten Eintrag (ab einer Woche mit Einträgen), eine Änderung des Einkommens verändert den Notgroschen also nicht.
 
 ## Währungen
