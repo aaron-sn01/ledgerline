@@ -1,1 +1,10 @@
+# Ledgerline price list
+# One fund per line: its ISIN, then optionally a name. Ledgerline finds the price by itself.
+# Lines starting with # are ignored. Example:
+# IE00BK5BQT80 Vanguard FTSE All-World
+# Coins: their short symbol instead of an ISIN (for the returns and the wealth history), e.g.:
+# ETH Ethereum
 IE00B14X4T88 iShares Asia Pacific Dividend
+ETH Ethereum
+XLM Stellar
+VET VeChain
