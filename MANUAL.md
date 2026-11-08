@@ -1,6 +1,6 @@
 # Ledgerline manual
 
-*Version 2026-11-08 · 153. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
+*Version 2026-11-08 · 154. This manual is updated together with every new version of the app; the version number in **Settings → Backup & export** should match.*
 
 Ledgerline is your personal budget and wealth app: one web page (`index.html`) on GitHub Pages, plus a small price updater that runs on GitHub. Your data never leaves your devices except as an encrypted sync file in your own GitHub account. Sections 1 to 13 are for you; section 14 is for an AI assistant or developer working on the app.
 

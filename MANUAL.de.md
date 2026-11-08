@@ -1,6 +1,6 @@
 # Ledgerline-Anleitung
 
-*Version 2026-11-08 · 153. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
+*Version 2026-11-08 · 154. Diese Anleitung wird mit jeder neuen Version der App aktualisiert; die Versionsnummer unter **Einstellungen → Backup & Export** sollte übereinstimmen.*
 
 Ledgerline ist deine persönliche Budget- und Vermögens-App: eine Webseite (`index.html`) auf GitHub Pages und ein kleiner Kurs-Updater, der auf GitHub läuft. Deine Daten verlassen deine Geräte nie, außer als verschlüsselte Sync-Datei in deinem eigenen GitHub-Konto. Abschnitte 1 bis 13 sind für dich; Abschnitt 14 ist für eine KI oder einen Entwickler, die an der App arbeiten.
 
